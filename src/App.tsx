@@ -1,5 +1,7 @@
-function App() {
-  return <h1 className="underline text-xl">Hello World</h1>;
-}
+import { SimpleSideBar } from "@/Components/Layouts";
+
+const App = () => {
+  return <SimpleSideBar />;
+};
 
 export default App;
