@@ -9,10 +9,10 @@ import {
 } from "@chakra-ui/react";
 import { FiMenu } from "react-icons/fi";
 
-interface MobileProps extends FlexProps {
+interface NavbarProps extends FlexProps {
   onOpen: () => void;
 }
-export const MobileNav = ({ onOpen, ...rest }: MobileProps): JSX.Element => {
+export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
