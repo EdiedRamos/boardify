@@ -1,4 +1,6 @@
 import {
+  Box,
+  Button,
   Flex,
   FlexProps,
   IconButton,
@@ -20,19 +22,24 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps): JSX.Element => {
       bg={useColorModeValue("white", "gray.900")}
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue("gray.200", "gray.700")}
-      justifyContent="flex-start"
+      justifyContent="space-between"
       {...rest}
     >
-      <IconButton
-        variant="outline"
-        onClick={onOpen}
-        aria-label="open menu"
-        icon={<FiMenu />}
-      />
-
-      <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-        Boardify
-      </Text>
+      <Flex alignItems="center">
+        <IconButton
+          display={{ base: "flex", md: "none" }}
+          variant="outline"
+          onClick={onOpen}
+          aria-label="open menu"
+          icon={<FiMenu />}
+        />
+        <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
+          Boardify
+        </Text>
+      </Flex>
+      <Box>
+        <Button colorScheme="messenger">+ Add new task</Button>
+      </Box>
     </Flex>
   );
 };

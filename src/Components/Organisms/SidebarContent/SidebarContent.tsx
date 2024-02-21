@@ -12,11 +12,13 @@ import { TbLayoutDashboard } from "react-icons/tb";
 
 import { NavItem } from "@/Components/Molecules";
 
-interface LinkItemProps {
+interface BoardListProps {
   name: string;
   icon: IconType;
 }
-const LinkItems: Array<LinkItemProps> = [
+const BoardList: Array<BoardListProps> = [
+  { name: "Roadmap", icon: TbLayoutDashboard },
+  { name: "Marketing Plan", icon: TbLayoutDashboard },
   { name: "+ Create new board", icon: TbLayoutDashboard },
 ];
 
@@ -44,7 +46,7 @@ export const SidebarContent = ({
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
+      {BoardList.map((link) => (
         <NavItem key={link.name} icon={link.icon}>
           {link.name}
         </NavItem>

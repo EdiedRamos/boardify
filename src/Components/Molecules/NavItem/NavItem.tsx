@@ -11,7 +11,7 @@ export const NavItem = ({
   ...rest
 }: NavItemProps): JSX.Element => {
   return (
-    <Box as="a" href="#" textDecoration={"none"} _focus={{ boxShadow: "none" }}>
+    <Box as="button" textDecoration={"none"} _focus={{ boxShadow: "none" }}>
       <Flex
         align="center"
         p="4"

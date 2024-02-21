@@ -1,5 +1,4 @@
 import {
-  useDisclosure,
   Box,
   Drawer,
   useColorModeValue,
@@ -8,9 +7,10 @@ import {
 
 import { MobileNav } from "@/Components/Layouts";
 import { SidebarContent } from "@/Components/Organisms";
+import { useDashboard } from "./useDashboard";
 
-export const SimpleSideBar = (): JSX.Element => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export const Dashboard = (): JSX.Element => {
+  const { isOpen, onOpen, onClose, isMobile } = useDashboard();
 
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
@@ -19,9 +19,9 @@ export const SimpleSideBar = (): JSX.Element => {
         display={{ base: "none", md: "block" }}
       />
       <Drawer
-        isOpen={isOpen}
-        placement="left"
+        isOpen={isMobile ? isOpen : false}
         onClose={onClose}
+        placement="left"
         returnFocusOnClose={false}
         onOverlayClick={onClose}
         size="full"
@@ -31,7 +31,7 @@ export const SimpleSideBar = (): JSX.Element => {
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
+      <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {/* Content */}
       </Box>

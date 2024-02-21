@@ -1,7 +1,7 @@
-import { SimpleSideBar } from "@/Components/Layouts";
+import { Dashboard } from "@/Pages";
 
 const App = () => {
-  return <SimpleSideBar />;
+  return <Dashboard />;
 };
 
 export default App;
