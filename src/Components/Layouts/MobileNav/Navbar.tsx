@@ -1,3 +1,4 @@
+import { OptionsMenu } from "@/Components/Molecules";
 import {
   Box,
   Button,
@@ -34,12 +35,17 @@ export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
           icon={<FiMenu />}
         />
         <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-          Boardify
+          Roadmap
         </Text>
       </Flex>
-      <Box>
-        <Button colorScheme="messenger">+ Add new task</Button>
-      </Box>
+      <Flex gap={1}>
+        <Box>
+          <Button colorScheme="messenger">+ Add new task</Button>
+        </Box>
+        <Box>
+          <OptionsMenu />
+        </Box>
+      </Flex>
     </Flex>
   );
 };

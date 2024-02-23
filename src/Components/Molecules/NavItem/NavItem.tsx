@@ -3,11 +3,13 @@ import { IconType } from "react-icons";
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
+  bg?: string;
   children: string | number;
 }
 export const NavItem = ({
   icon,
   children,
+  bg,
   ...rest
 }: NavItemProps): JSX.Element => {
   return (
@@ -18,9 +20,8 @@ export const NavItem = ({
         mx="4"
         borderRadius="lg"
         role="group"
-        cursor="pointer"
         _hover={{
-          bg: "cyan.400",
+          bg: bg || "teal.400",
           color: "white",
         }}
         {...rest}

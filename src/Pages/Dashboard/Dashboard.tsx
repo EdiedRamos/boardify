@@ -6,7 +6,7 @@ import {
 } from "@chakra-ui/react";
 
 import { Navbar } from "@/Components/Layouts";
-import { SidebarContent } from "@/Components/Organisms";
+import { Board, SidebarContent } from "@/Components/Organisms";
 import { useDashboard } from "./useDashboard";
 
 export const Dashboard = (): JSX.Element => {
@@ -31,9 +31,8 @@ export const Dashboard = (): JSX.Element => {
         </DrawerContent>
       </Drawer>
       <Navbar onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
-        {/* Content */}
-      </Box>
+      {/* Content */}
+      <Board />
     </Box>
   );
 };
