@@ -14,11 +14,12 @@ import type { ValuesType } from "@/Components/Organisms/AddTask/AddTaskControlle
 export interface IDashboardState {
   // * Properties
   boards: DashboardType;
-  currentBoard: number | null;
+  currentBoard: number | null | undefined;
   // * Methods
   setBoards: (boards: DashboardType) => void;
   setCurrentBoard: (boardId: number) => void;
   addBoard: (board: Omit<BoardBaseType, "id">) => void;
+  deleteBoard: () => void;
   addTaskGroup: (taskGroup: Omit<TaskGroupBaseType, "id">) => void;
   addTask: (task: ValuesType) => void;
 }
@@ -47,6 +48,18 @@ export const useDashboardStore = create<IDashboardState>()((set) => ({
         boardList: [...store.boards.boardList, newBoard],
       },
       currentBoard: 12,
+    }));
+  },
+  deleteBoard() {
+    set((store) => ({
+      boards: {
+        boardList: store.boards.boardList.filter(
+          (board) => board.id !== store.currentBoard
+        ),
+      },
+    }));
+    set((store) => ({
+      currentBoard: store.boards.boardList[0]?.id,
     }));
   },
   addTaskGroup(taskGroup) {
