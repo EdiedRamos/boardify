@@ -7,20 +7,12 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { IconType } from "react-icons";
 import { TbLayoutDashboard } from "react-icons/tb";
 
 import { NavItem } from "@/Components/Molecules";
 
-interface BoardListProps {
-  name: string;
-  icon: IconType;
-}
-const BoardList: Array<BoardListProps> = [
-  { name: "Roadmap", icon: TbLayoutDashboard },
-  { name: "Marketing Plan", icon: TbLayoutDashboard },
-  { name: "+ Create new board", icon: TbLayoutDashboard },
-];
+import { useDashboardStore } from "@/Store";
+import { AddBoard } from "..";
 
 interface SidebarProps extends BoxProps {
   onClose: () => void;
@@ -30,6 +22,8 @@ export const SidebarContent = ({
   onClose,
   ...rest
 }: SidebarProps): JSX.Element => {
+  const { boards, setCurrentBoard, currentBoard } = useDashboardStore();
+
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
@@ -46,11 +40,17 @@ export const SidebarContent = ({
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
-      {BoardList.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+      {boards.boardList.map((link) => (
+        <NavItem
+          bg={currentBoard === link.id ? "purple.400" : undefined}
+          key={link.name}
+          icon={TbLayoutDashboard}
+          onClick={() => setCurrentBoard(link.id)}
+        >
           {link.name}
         </NavItem>
       ))}
+      <AddBoard />
     </Box>
   );
 };

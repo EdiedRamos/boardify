@@ -1,29 +1,29 @@
 import { Stack, Tag } from "@chakra-ui/react";
 import { TaskPreview } from "@/Components/Molecules";
 
-import { IBoard } from "@/Types";
+import type { TaskGroupType } from "@/Types";
 
-interface TaskColumnI extends IBoard {
+interface TaskColumnI extends TaskGroupType {
   index: number;
 }
 
 export const TaskColumn = (props: TaskColumnI): JSX.Element => {
   return (
-    <Stack>
+    <Stack w="sm">
       <Tag
+        w="sm"
         justifyContent="center"
-        size="md"
         colorScheme={
           ["whatsapp", "messenger", "twitter", "facebook", "linkedin"][
             props.index % 5
           ]
         }
       >
-        {props.status} ({props.taskList.length})
+        {props.status} ({props.taskList?.length})
       </Tag>
       <Stack overflowX="hidden" overflowY="auto">
-        {props.taskList.map(({ title, text }) => (
-          <TaskPreview key={title} title={title} text={text} />
+        {props.taskList.map(({ title, description }) => (
+          <TaskPreview key={title} title={title} text={description} />
         ))}
       </Stack>
     </Stack>

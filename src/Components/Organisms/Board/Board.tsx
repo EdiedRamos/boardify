@@ -1,10 +1,12 @@
 import { Box } from "@chakra-ui/react";
 
-import { BoardMock } from "@/Pages/Dashboard/data";
+import { AddTaskGroup, TaskColumn } from "@/Components/Organisms";
 
-import { TaskColumn, StatusForm } from "@/Components/Organisms";
+import { useDashboardStore } from "@/Store";
 
 export const Board = (): JSX.Element => {
+  const { boards, currentBoard } = useDashboardStore();
+
   return (
     <Box
       display="flex"
@@ -15,10 +17,12 @@ export const Board = (): JSX.Element => {
       ml={{ base: 0, md: 60 }}
       p="4"
     >
-      {BoardMock.map((board, index) => (
-        <TaskColumn {...{ ...board, index }} />
-      ))}
-      <StatusForm />
+      {boards.boardList
+        .find((board) => board.id === currentBoard)
+        ?.taskGroupList.map((board, index) => (
+          <TaskColumn {...{ ...board, index }} />
+        ))}
+      <AddTaskGroup />
     </Box>
   );
 };

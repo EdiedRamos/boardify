@@ -27,10 +27,24 @@ export const OptionsMenu = (): JSX.Element => {
         <PopoverArrow />
         <PopoverBody>
           <Stack alignItems="center">
-            <NavItem icon={FaRegEdit} bg="cyan.400" mx={0} p={2} w={150}>
+            <NavItem
+              icon={FaRegEdit}
+              bg="cyan.400"
+              mx={0}
+              p={2}
+              w={150}
+              onClick={() => {}}
+            >
               Edit board
             </NavItem>
-            <NavItem icon={MdDelete} bg="red.400" mx={0} p={2} w={150}>
+            <NavItem
+              icon={MdDelete}
+              bg="red.400"
+              mx={0}
+              p={2}
+              w={150}
+              onClick={() => {}}
+            >
               Delete board
             </NavItem>
           </Stack>

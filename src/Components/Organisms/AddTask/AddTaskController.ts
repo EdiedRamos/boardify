@@ -1,0 +1,64 @@
+import { useDashboardStore } from "@/Store";
+import type { TaskType } from "@/Types";
+
+export type ValuesType = Omit<TaskType, "id" | "subtaskList" | "status"> & {
+  subtaskList: { title: string }[];
+  status: string;
+};
+
+type ValidateType = Partial<Omit<ValuesType, "status"> & { status: string }>;
+
+type AddBoardControllerType = {
+  onClose: () => void;
+};
+
+export const AddTaskController = ({ onClose }: AddBoardControllerType) => {
+  const { addTask, boards, currentBoard } = useDashboardStore();
+
+  const initialValues: ValuesType = {
+    title: "",
+    description: "",
+    subtaskList: [{ title: "" }],
+    status: "",
+  };
+
+  const onSubmit = (values: ValuesType) => {
+    addTask(values);
+    onClose();
+  };
+
+  const validate = (values: ValuesType) => {
+    const errors: ValidateType = {};
+
+    const isTitleEmpty = values.title.trim().length === 0;
+    if (isTitleEmpty) {
+      errors.title = "Name is required";
+    }
+
+    const isDescriptionEmpty = values.description.trim().length === 0;
+    if (isDescriptionEmpty) {
+      errors.description = "Description is required";
+    }
+
+    const isStatusEmpty = +values.status === 0;
+    if (isStatusEmpty) {
+      errors.status = "Status is required";
+    }
+
+    return errors;
+  };
+
+  return {
+    initialValues,
+    onSubmit,
+    validate,
+    isDisabled:
+      currentBoard === null
+        ? true
+        : boards.boardList.find((board) => board.id === currentBoard)
+            ?.taskGroupList.length === 0,
+    taskGroupList: boards.boardList
+      .find((board) => board.id === currentBoard)
+      ?.taskGroupList.map(({ id, status }) => ({ id, status })),
+  };
+};

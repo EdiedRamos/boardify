@@ -3,17 +3,24 @@ import { IconType } from "react-icons";
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
-  bg?: string;
+  hoverBg?: string;
   children: string | number;
+  onClick: () => void;
 }
 export const NavItem = ({
   icon,
   children,
-  bg,
+  hoverBg,
+  onClick,
   ...rest
 }: NavItemProps): JSX.Element => {
   return (
-    <Box as="button" textDecoration={"none"} _focus={{ boxShadow: "none" }}>
+    <Box
+      as="button"
+      textDecoration={"none"}
+      _focus={{ boxShadow: "none" }}
+      onClick={onClick}
+    >
       <Flex
         align="center"
         p="4"
@@ -21,7 +28,7 @@ export const NavItem = ({
         borderRadius="lg"
         role="group"
         _hover={{
-          bg: bg || "teal.400",
+          bg: hoverBg || "teal.400",
           color: "white",
         }}
         {...rest}

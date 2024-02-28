@@ -1,7 +1,6 @@
 import { OptionsMenu } from "@/Components/Molecules";
 import {
   Box,
-  Button,
   Flex,
   FlexProps,
   IconButton,
@@ -10,10 +9,19 @@ import {
 } from "@chakra-ui/react";
 import { FiMenu } from "react-icons/fi";
 
+// just trying Zustand
+import { useDashboardStore } from "@/Store";
+import { AddTask } from "@/Components/Organisms";
+
 interface NavbarProps extends FlexProps {
   onOpen: () => void;
 }
+
+// TODO: Improve current board name searching
+
 export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
+  const { boards, currentBoard } = useDashboardStore();
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -35,12 +43,12 @@ export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
           icon={<FiMenu />}
         />
         <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-          Roadmap
+          {boards.boardList.find((board) => board.id === currentBoard)?.name}
         </Text>
       </Flex>
       <Flex gap={1}>
         <Box>
-          <Button colorScheme="messenger">+ Add new task</Button>
+          <AddTask />
         </Box>
         <Box>
           <OptionsMenu />
