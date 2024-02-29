@@ -3,9 +3,14 @@ import { Box } from "@chakra-ui/react";
 import { AddTaskGroup, TaskColumn } from "@/Components/Organisms";
 
 import { useDashboardStore } from "@/Store";
+import { EmptySection } from "@/Components/Atoms";
 
 export const Board = (): JSX.Element => {
   const { boards, currentBoard } = useDashboardStore();
+
+  if (currentBoard === null || currentBoard === undefined) {
+    return <EmptySection />;
+  }
 
   return (
     <Box
@@ -14,7 +19,6 @@ export const Board = (): JSX.Element => {
       overflowX="auto"
       overflowY="hidden"
       gap={5}
-      ml={{ base: 0, md: 60 }}
       p="4"
     >
       {boards.boardList

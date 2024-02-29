@@ -24,7 +24,6 @@ export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
 
   return (
     <Flex
-      ml={{ base: 0, md: 60 }}
       px={{ base: 4, md: 24 }}
       height="20"
       alignItems="center"

@@ -8,6 +8,8 @@ import {
 import { Navbar } from "@/Components/Layouts";
 import { Board, SidebarContent } from "@/Components/Organisms";
 import { useDashboard } from "./useDashboard";
+import { EmptySection } from "@/Components/Atoms";
+import { useDashboardStore } from "@/Store";
 
 export const Dashboard = (): JSX.Element => {
   const { isOpen, onOpen, onClose, isMobile } = useDashboard();
@@ -30,9 +32,10 @@ export const Dashboard = (): JSX.Element => {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      <Navbar onOpen={onOpen} />
-      {/* Content */}
-      <Board />
+      <Box ml={{ base: 0, md: 60 }}>
+        <Navbar onOpen={onOpen} />
+        <Board />
+      </Box>
     </Box>
   );
 };

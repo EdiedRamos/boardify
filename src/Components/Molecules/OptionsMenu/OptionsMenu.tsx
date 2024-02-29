@@ -12,12 +12,17 @@ import {
 import { SlOptionsVertical } from "react-icons/sl";
 
 import { DeleteBoard, UpdateBoard } from "..";
+import { useDashboardStore } from "@/Store";
 
 export const OptionsMenu = (): JSX.Element => {
+  const { currentBoard } = useDashboardStore();
   return (
     <Popover>
       <PopoverTrigger>
-        <Button colorScheme="twitter">
+        <Button
+          colorScheme="twitter"
+          isDisabled={currentBoard === null || currentBoard === undefined}
+        >
           <Icon as={SlOptionsVertical} />
         </Button>
       </PopoverTrigger>

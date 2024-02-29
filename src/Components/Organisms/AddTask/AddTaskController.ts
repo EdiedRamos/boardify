@@ -53,7 +53,7 @@ export const AddTaskController = ({ onClose }: AddBoardControllerType) => {
     onSubmit,
     validate,
     isDisabled:
-      currentBoard === null
+      currentBoard === null || currentBoard === undefined
         ? true
         : boards.boardList.find((board) => board.id === currentBoard)
             ?.taskGroupList.length === 0,
