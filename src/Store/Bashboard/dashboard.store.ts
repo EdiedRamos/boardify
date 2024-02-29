@@ -19,6 +19,7 @@ export interface IDashboardState {
   setBoards: (boards: DashboardType) => void;
   setCurrentBoard: (boardId: number) => void;
   addBoard: (board: Omit<BoardBaseType, "id">) => void;
+  updateBoard: (board: Omit<BoardBaseType, "id">) => void;
   deleteBoard: () => void;
   addTaskGroup: (taskGroup: Omit<TaskGroupBaseType, "id">) => void;
   addTask: (task: ValuesType) => void;
@@ -49,6 +50,23 @@ export const useDashboardStore = create<IDashboardState>()((set) => ({
       },
       currentBoard: 12,
     }));
+  },
+  updateBoard(board) {
+    set((store) => {
+      return {
+        boards: {
+          boardList: store.boards.boardList.map((currentBoard) => {
+            if (currentBoard.id === store.currentBoard) {
+              return {
+                ...currentBoard,
+                ...board,
+              };
+            }
+            return currentBoard;
+          }),
+        },
+      };
+    });
   },
   deleteBoard() {
     set((store) => ({

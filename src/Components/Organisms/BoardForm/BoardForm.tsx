@@ -1,5 +1,3 @@
-import { useRef } from "react";
-import { NavItem } from "@/Components/Molecules";
 import {
   Button,
   FormControl,
@@ -15,27 +13,32 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { TbLayoutDashboard } from "react-icons/tb";
 
 import { Field, Form, Formik } from "formik";
-import { AddBoardController } from "./AddBoardController";
+import { BoardFormController } from "./BoardFormController";
 
-export const AddBoard = (): JSX.Element => {
+type PropsType = {
+  isCreating: boolean;
+  children: (props: { onClick: () => void }) => JSX.Element;
+};
+
+export const BoardForm = ({ children, isCreating }: PropsType) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { initialValues, onSubmit, validate } = AddBoardController({ onClose });
-
-  const initialRef = useRef(null);
+  const { initialValues, onSubmit, validate } = BoardFormController({
+    onClose,
+    isCreating,
+  });
 
   return (
     <>
-      <NavItem icon={TbLayoutDashboard} onClick={onOpen}>
-        + Create new board
-      </NavItem>
+      {children({ onClick: onOpen })}
 
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create a new board</ModalHeader>
+          <ModalHeader>
+            {isCreating ? "Create a new board" : "Update the board"}
+          </ModalHeader>
           <ModalCloseButton />
           <Formik
             initialValues={initialValues}
@@ -47,19 +50,14 @@ export const AddBoard = (): JSX.Element => {
                 <ModalBody pb={6}>
                   <FormControl isRequired isInvalid={!!props.errors.name}>
                     <FormLabel>Name</FormLabel>
-                    <Input
-                      as={Field}
-                      ref={initialRef}
-                      placeholder="Board name"
-                      name="name"
-                    />
+                    <Input as={Field} placeholder="Board name" name="name" />
                     <FormErrorMessage>{props.errors.name}</FormErrorMessage>
                   </FormControl>
                 </ModalBody>
 
                 <ModalFooter>
                   <Button type="submit" colorScheme="blue" mr={3}>
-                    Create
+                    {isCreating ? "Create" : "Update"}
                   </Button>
                   <Button onClick={onClose}>Cancel</Button>
                 </ModalFooter>

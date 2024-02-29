@@ -12,7 +12,7 @@ import { TbLayoutDashboard } from "react-icons/tb";
 import { NavItem } from "@/Components/Molecules";
 
 import { useDashboardStore } from "@/Store";
-import { AddBoard } from "..";
+import { AddBoard } from "@/Components/Molecules";
 
 interface SidebarProps extends BoxProps {
   onClose: () => void;

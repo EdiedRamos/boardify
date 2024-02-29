@@ -4,18 +4,34 @@ import type { BoardBaseType } from "@/Types";
 type ValuesType = Omit<BoardBaseType, "id">;
 
 type AddBoardControllerType = {
+  isCreating: boolean;
   onClose: () => void;
 };
 
-export const AddBoardController = ({ onClose }: AddBoardControllerType) => {
-  const { addBoard } = useDashboardStore();
+export const BoardFormController = ({
+  onClose,
+  isCreating,
+}: AddBoardControllerType) => {
+  const { addBoard, updateBoard } = useDashboardStore();
 
   const initialValues: ValuesType = {
     name: "",
   };
 
-  const onSubmit = (values: ValuesType) => {
+  const onCreate = (values: ValuesType): void => {
     addBoard(values);
+  };
+
+  const onUpdate = (values: ValuesType): void => {
+    updateBoard(values);
+  };
+
+  const onSubmit = (values: ValuesType): void => {
+    if (isCreating) {
+      onCreate(values);
+    } else {
+      onUpdate(values);
+    }
     onClose();
   };
 
