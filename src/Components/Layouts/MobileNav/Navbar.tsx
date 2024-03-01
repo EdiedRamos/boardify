@@ -24,7 +24,7 @@ export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
 
   return (
     <Flex
-      px={{ base: 4, md: 24 }}
+      px={{ base: 4, md: 10 }}
       height="20"
       alignItems="center"
       bg={useColorModeValue("white", "gray.900")}
@@ -41,7 +41,12 @@ export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
           aria-label="open menu"
           icon={<FiMenu />}
         />
-        <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
+        <Text
+          fontSize="2xl"
+          ml={{ base: 4, md: 0 }}
+          fontFamily="monospace"
+          fontWeight="bold"
+        >
           {boards.boardList.find((board) => board.id === currentBoard)?.name}
         </Text>
       </Flex>
