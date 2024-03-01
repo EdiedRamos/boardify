@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react";
 import { AddTaskGroup, TaskColumn } from "@/Components/Organisms";
 
 import { useDashboardStore } from "@/Store";
-import { EmptySection } from "@/Components/Atoms";
+import { EmptySection } from "@/Components/Molecules";
 
 export const Board = (): JSX.Element => {
   const { boards, currentBoard } = useDashboardStore();
