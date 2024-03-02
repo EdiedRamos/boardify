@@ -7,7 +7,7 @@ export const UpdateBoard = () => {
     <BoardForm isCreating={false}>
       {(props) => (
         <NavItem icon={FaRegEdit} mx={0} p={2} w={150} onClick={props.onClick}>
-          Edit board
+          Edit Board
         </NavItem>
       )}
     </BoardForm>

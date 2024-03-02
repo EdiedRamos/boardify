@@ -37,7 +37,7 @@ export const BoardForm = ({ children, isCreating }: PropsType) => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            {isCreating ? "Create a new board" : "Update the board"}
+            {isCreating ? "Create a New Board" : "Update The Board"}
           </ModalHeader>
           <ModalCloseButton />
           <Formik

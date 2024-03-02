@@ -15,7 +15,7 @@ export const DeleteBoard = () => {
     >
       {(props) => (
         <NavItem icon={MdDelete} mx={0} p={2} w={150} onClick={props.onClick}>
-          Delete board
+          Delete Board
         </NavItem>
       )}
     </ConfirmationDialog>

@@ -7,7 +7,7 @@ export const AddBoard = () => {
     <BoardForm isCreating>
       {(props) => (
         <NavItem icon={IoIosCreate} onClick={props.onClick}>
-          + Create new board
+          + Create Board
         </NavItem>
       )}
     </BoardForm>
