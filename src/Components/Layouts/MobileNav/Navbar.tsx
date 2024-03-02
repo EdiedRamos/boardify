@@ -12,6 +12,7 @@ import { FiMenu } from "react-icons/fi";
 // just trying Zustand
 import { useDashboardStore } from "@/Store";
 import { AddTask } from "@/Components/Organisms";
+import { TextCutter } from "@/Components/Atoms";
 
 interface NavbarProps extends FlexProps {
   onOpen: () => void;
@@ -47,7 +48,11 @@ export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
           fontFamily="monospace"
           fontWeight="bold"
         >
-          {boards.boardList.find((board) => board.id === currentBoard)?.name}
+          <TextCutter maxLength={10}>
+            {String(
+              boards.boardList.find((board) => board.id === currentBoard)?.name
+            )}
+          </TextCutter>
         </Text>
       </Flex>
       <Flex gap={1}>
