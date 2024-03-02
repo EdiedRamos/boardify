@@ -14,14 +14,7 @@ export const DeleteBoard = () => {
       onAccept={deleteBoard}
     >
       {(props) => (
-        <NavItem
-          icon={MdDelete}
-          bg="red.400"
-          mx={0}
-          p={2}
-          w={150}
-          onClick={props.onClick}
-        >
+        <NavItem icon={MdDelete} mx={0} p={2} w={150} onClick={props.onClick}>
           Delete board
         </NavItem>
       )}
