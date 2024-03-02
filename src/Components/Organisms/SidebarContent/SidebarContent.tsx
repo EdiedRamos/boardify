@@ -3,6 +3,7 @@ import {
   BoxProps,
   CloseButton,
   Flex,
+  Stack,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -40,17 +41,19 @@ export const SidebarContent = ({
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
-      {boards.boardList.map((link) => (
-        <NavItem
-          bg={currentBoard === link.id ? "purple.400" : undefined}
-          key={link.name}
-          icon={TbLayoutDashboard}
-          onClick={() => setCurrentBoard(link.id)}
-        >
-          {link.name}
-        </NavItem>
-      ))}
-      <AddBoard />
+      <Stack>
+        {boards.boardList.map((link) => (
+          <NavItem
+            bg={currentBoard === link.id ? "purple.400" : undefined}
+            key={link.name}
+            icon={TbLayoutDashboard}
+            onClick={() => setCurrentBoard(link.id)}
+          >
+            {link.name}
+          </NavItem>
+        ))}
+        <AddBoard />
+      </Stack>
     </Box>
   );
 };

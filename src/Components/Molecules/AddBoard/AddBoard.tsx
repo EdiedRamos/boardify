@@ -1,12 +1,12 @@
 import { NavItem } from "@/Components/Molecules";
 import { BoardForm } from "@/Components/Organisms";
-import { TbLayoutDashboard } from "react-icons/tb";
+import { IoIosCreate } from "react-icons/io";
 
 export const AddBoard = () => {
   return (
     <BoardForm isCreating>
       {(props) => (
-        <NavItem icon={TbLayoutDashboard} onClick={props.onClick}>
+        <NavItem icon={IoIosCreate} onClick={props.onClick}>
           + Create new board
         </NavItem>
       )}
