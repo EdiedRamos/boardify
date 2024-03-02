@@ -7,7 +7,7 @@ type TaskPreviewProps = {
 
 export const TaskPreview = ({ title, text }: TaskPreviewProps): JSX.Element => {
   return (
-    <Card variant="elevated" w="sm">
+    <Card variant="elevated">
       <CardHeader>
         <Heading size="md">{title}</Heading>
       </CardHeader>

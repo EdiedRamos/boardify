@@ -12,9 +12,10 @@ export const TaskColumn = (props: TaskColumnI): JSX.Element => {
     <Stack w="sm">
       <Tag
         w="sm"
+        p={2}
         justifyContent="center"
         colorScheme={
-          ["whatsapp", "messenger", "twitter", "facebook", "linkedin"][
+          ["whatsapp", "purple", "twitter", "facebook", "linkedin"][
             props.index % 5
           ]
         }

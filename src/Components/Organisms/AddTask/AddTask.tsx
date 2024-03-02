@@ -36,7 +36,7 @@ export const AddTask = (): JSX.Element => {
   return (
     <>
       <Button colorScheme="messenger" onClick={onOpen} isDisabled={isDisabled}>
-        + Add new task
+        + New Task
       </Button>
 
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
@@ -124,7 +124,10 @@ export const AddTask = (): JSX.Element => {
                     >
                       {taskGroupList?.map(({ id, status }) => (
                         <option key={id} value={id}>
-                          {status} {id}
+                          {status.length > 10
+                            ? status.substring(0, 10).concat("...")
+                            : status}{" "}
+                          {id}
                         </option>
                       ))}
                     </Field>

@@ -33,6 +33,7 @@ export const SidebarContent = ({
       w={{ base: "full", md: 60 }}
       pos="fixed"
       h="full"
+      overflow="auto"
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">

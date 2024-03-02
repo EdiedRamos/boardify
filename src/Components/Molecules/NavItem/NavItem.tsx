@@ -27,6 +27,7 @@ export const NavItem = ({
         mx="4"
         borderRadius="lg"
         role="group"
+        wordBreak="break-word"
         _hover={{
           bg: hoverBg || "teal.400",
           color: "white",
@@ -35,7 +36,7 @@ export const NavItem = ({
       >
         {icon && (
           <Icon
-            mr="4"
+            mr="2"
             fontSize="16"
             _groupHover={{
               color: "white",

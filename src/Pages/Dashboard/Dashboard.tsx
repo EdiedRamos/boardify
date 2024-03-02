@@ -8,8 +8,6 @@ import {
 import { Navbar } from "@/Components/Layouts";
 import { Board, SidebarContent } from "@/Components/Organisms";
 import { useDashboard } from "./useDashboard";
-import { EmptySection } from "@/Components/Atoms";
-import { useDashboardStore } from "@/Store";
 
 export const Dashboard = (): JSX.Element => {
   const { isOpen, onOpen, onClose, isMobile } = useDashboard();
