@@ -6,3 +6,5 @@ export { UpdateBoard } from "./UpdateBoard/UpdateBoard";
 export { AddBoard } from "./AddBoard/AddBoard";
 export { DeleteBoard } from "./DeleteBoard/DeleteBoard";
 export { EmptySection } from "./EmptySection/EmptySection";
+export { SignIn } from "./SignIn/SignIn";
+export { SignUp } from "./SignUp/SignUp";
