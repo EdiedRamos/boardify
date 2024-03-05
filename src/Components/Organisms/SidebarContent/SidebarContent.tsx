@@ -14,6 +14,7 @@ import { NavItem } from "@/Components/Molecules";
 
 import { useDashboardStore } from "@/Store";
 import { AddBoard } from "@/Components/Molecules";
+import { User } from "@/Components/Organisms";
 
 interface SidebarProps extends BoxProps {
   onClose: () => void;
@@ -40,7 +41,13 @@ export const SidebarContent = ({
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
           Boardify
         </Text>
-        <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
+        <Flex gap="20px">
+          <User />
+          <CloseButton
+            display={{ base: "flex", md: "none" }}
+            onClick={onClose}
+          />
+        </Flex>
       </Flex>
       <Stack>
         {boards.boardList.map((link) => (
