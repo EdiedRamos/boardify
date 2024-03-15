@@ -64,10 +64,10 @@ export const ConfirmationDialog = ({
             <AlertDialogBody>{body}</AlertDialogBody>
 
             <AlertDialogFooter>
-              <Button onClick={handleCancel}>{cancelText}</Button>
-              <Button colorScheme="red" onClick={handleAccept} ml={3}>
+              <Button colorScheme="red" onClick={handleAccept} mr={3}>
                 {acceptText}
               </Button>
+              <Button onClick={handleCancel}>{cancelText}</Button>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialogOverlay>

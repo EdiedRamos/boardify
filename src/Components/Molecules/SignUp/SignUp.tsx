@@ -56,10 +56,12 @@ export const SignUp = ({ ...props }: PropTypes): JSX.Element => {
             </Stack>
           </DrawerBody>
           <DrawerFooter borderTopWidth="1px">
-            <Button variant="outline" mr={3} onClick={onClose}>
+            <Button colorScheme="blue" mr={3}>
+              Create
+            </Button>
+            <Button variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue">Create</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

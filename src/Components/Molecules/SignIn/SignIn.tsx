@@ -88,11 +88,11 @@ export const SignIn = ({ ...props }: PropTypes): JSX.Element => {
                   </Stack>
                 </DrawerBody>
                 <DrawerFooter borderTopWidth="1px">
-                  <Button variant="outline" mr={3} onClick={onClose}>
-                    Cancel
-                  </Button>
-                  <Button type="submit" colorScheme="blue">
+                  <Button type="submit" colorScheme="blue" mr={3}>
                     Login
+                  </Button>
+                  <Button variant="outline" onClick={onClose}>
+                    Cancel
                   </Button>
                 </DrawerFooter>
               </Form>
