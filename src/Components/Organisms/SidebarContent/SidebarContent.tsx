@@ -1,6 +1,7 @@
 import {
   Box,
   BoxProps,
+  Center,
   CloseButton,
   Flex,
   Stack,
@@ -15,6 +16,7 @@ import { NavItem } from "@/Components/Molecules";
 import { useDashboardStore } from "@/Store";
 import { AddBoard } from "@/Components/Molecules";
 import { User } from "@/Components/Organisms";
+import { ColorModeToggle } from "@/Components/Atoms";
 
 interface SidebarProps extends BoxProps {
   onClose: () => void;
@@ -34,7 +36,8 @@ export const SidebarContent = ({
       w={{ base: "full", md: 60 }}
       pos="fixed"
       h="full"
-      overflow="auto"
+      overflowY="auto"
+      overflowX="hidden"
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
@@ -49,7 +52,7 @@ export const SidebarContent = ({
           />
         </Flex>
       </Flex>
-      <Stack>
+      <Stack h={"70%"} overflowY={"auto"}>
         {boards.boardList.map((link) => (
           <NavItem
             bg={currentBoard === link.id ? "purple.400" : undefined}
@@ -63,8 +66,13 @@ export const SidebarContent = ({
             {link.name}
           </NavItem>
         ))}
+      </Stack>
+      <Stack>
         <AddBoard onFinish={() => onClose()} />
       </Stack>
+      <Center mt={3}>
+        <ColorModeToggle />
+      </Center>
     </Box>
   );
 };
