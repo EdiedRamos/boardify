@@ -4,6 +4,7 @@ import type { BoardBaseType } from "@/Types";
 type ValuesType = Omit<BoardBaseType, "id">;
 
 type AddBoardControllerType = {
+  onFinish?: () => void;
   isCreating: boolean;
   onClose: () => void;
 };
@@ -11,6 +12,7 @@ type AddBoardControllerType = {
 export const BoardFormController = ({
   onClose,
   isCreating,
+  onFinish,
 }: AddBoardControllerType) => {
   const { addBoard, updateBoard } = useDashboardStore();
 
@@ -33,6 +35,7 @@ export const BoardFormController = ({
       onUpdate(values);
     }
     onClose();
+    onFinish && onFinish();
   };
 
   const validate = (values: ValuesType) => {

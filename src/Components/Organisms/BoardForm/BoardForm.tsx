@@ -18,15 +18,17 @@ import { Field, Form, Formik } from "formik";
 import { BoardFormController } from "./BoardFormController";
 
 type PropsType = {
+  onFinish?: () => void;
   isCreating: boolean;
   children: (props: { onClick: () => void }) => JSX.Element;
 };
 
-export const BoardForm = ({ children, isCreating }: PropsType) => {
+export const BoardForm = ({ children, isCreating, onFinish }: PropsType) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { initialValues, onSubmit, validate } = BoardFormController({
     onClose,
     isCreating,
+    onFinish,
   });
 
   return (

@@ -2,9 +2,13 @@ import { NavItem } from "@/Components/Molecules";
 import { BoardForm } from "@/Components/Organisms";
 import { IoIosCreate } from "react-icons/io";
 
-export const AddBoard = () => {
+type PropsType = {
+  onFinish?: () => void;
+};
+
+export const AddBoard = ({ onFinish }: PropsType) => {
   return (
-    <BoardForm isCreating>
+    <BoardForm isCreating onFinish={onFinish}>
       {(props) => (
         <NavItem icon={IoIosCreate} onClick={props.onClick}>
           + Create Board

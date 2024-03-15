@@ -55,12 +55,15 @@ export const SidebarContent = ({
             bg={currentBoard === link.id ? "purple.400" : undefined}
             key={link.name}
             icon={TbLayoutDashboard}
-            onClick={() => setCurrentBoard(link.id)}
+            onClick={() => {
+              setCurrentBoard(link.id);
+              onClose();
+            }}
           >
             {link.name}
           </NavItem>
         ))}
-        <AddBoard />
+        <AddBoard onFinish={() => onClose()} />
       </Stack>
     </Box>
   );
