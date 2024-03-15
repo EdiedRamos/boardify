@@ -45,7 +45,12 @@ export const AddTaskGroup = (): JSX.Element => {
         </Card>
       </Stack>
 
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        initialFocusRef={initialRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        isCentered
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Create a New Column</ModalHeader>
