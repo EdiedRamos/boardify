@@ -7,13 +7,9 @@ export const User = (): JSX.Element => {
       <MenuButton>
         <Avatar _hover={{ bg: "gray.600" }} size="sm" name="" src="" />
       </MenuButton>
-      <MenuList w={160}>
-        <MenuItem>
-          <SignIn />
-        </MenuItem>
-        <MenuItem>
-          <SignUp />
-        </MenuItem>
+      <MenuList w={160} textAlign={"center"}>
+        <SignIn as={MenuItem} mb={2} w={"90%"} mx={"auto"} />
+        <SignUp as={MenuItem} w={"90%"} mx={"auto"} />
       </MenuList>
     </Menu>
   );

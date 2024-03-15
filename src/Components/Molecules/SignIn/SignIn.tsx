@@ -1,5 +1,6 @@
 import {
   Button,
+  ButtonProps,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -24,14 +25,16 @@ import { useToggle } from "@/Core/Hooks";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
-export const SignIn = (): JSX.Element => {
+type PropTypes = ButtonProps;
+
+export const SignIn = ({ ...props }: PropTypes): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isActive, toggle } = useToggle();
   const { initialValues, onSubmit, validate } = SignInController();
 
   return (
     <>
-      <Button w="full" onClick={onOpen}>
+      <Button w={"full"} onClick={onOpen} {...props}>
         SignIn
       </Button>
       <Drawer isOpen={isOpen} placement="right" size="sm" onClose={onClose}>

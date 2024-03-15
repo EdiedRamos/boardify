@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  ButtonProps,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -15,12 +16,14 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-export const SignUp = (): JSX.Element => {
+type PropTypes = ButtonProps;
+
+export const SignUp = ({ ...props }: PropTypes): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <Button w="full" onClick={onOpen}>
+      <Button w="full" onClick={onOpen} {...props}>
         SignUp
       </Button>
       <Drawer isOpen={isOpen} placement="right" size="sm" onClose={onClose}>
