@@ -30,7 +30,7 @@ export const SignUp = ({ ...props }: PropTypes): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isActive, toggle } = useToggle();
 
-  const { initialValues, onSubmit, validate } = SignUpController();
+  const { initialValues, onSubmit, validate, isLoading } = SignUpController();
 
   return (
     <>
@@ -50,14 +50,14 @@ export const SignUp = ({ ...props }: PropTypes): JSX.Element => {
                 <DrawerBody>
                   <Stack spacing="24px">
                     {/* name */}
-                    <FormControl isRequired isInvalid={!!errors.name}>
-                      <FormLabel>Name</FormLabel>
+                    <FormControl isRequired isInvalid={!!errors.username}>
+                      <FormLabel>Username</FormLabel>
                       <Input
                         as={Field}
-                        name="name"
-                        placeholder="Enter your name"
+                        name="username"
+                        placeholder="Enter your username"
                       />
-                      <FormErrorMessage>{errors.name}</FormErrorMessage>
+                      <FormErrorMessage>{errors.username}</FormErrorMessage>
                     </FormControl>
                     {/* email */}
                     <FormControl isRequired isInvalid={!!errors.email}>
@@ -91,7 +91,12 @@ export const SignUp = ({ ...props }: PropTypes): JSX.Element => {
                   </Stack>
                 </DrawerBody>
                 <DrawerFooter borderTopWidth="1px">
-                  <Button type="submit" colorScheme="blue" mr={3}>
+                  <Button
+                    type="submit"
+                    isDisabled={isLoading}
+                    colorScheme="blue"
+                    mr={3}
+                  >
                     Create
                   </Button>
                   <Button variant="outline" onClick={onClose}>

@@ -8,6 +8,6 @@ export type {
   TaskType,
 } from "./Dashboard/dashboard.types";
 
-export type { LoginDataType } from "./Session/session.types";
+export type { LoginDataType, SignUpDataType } from "./Session/session.types";
 
 export type { ToastStatusType } from "./Toast/toast.types";

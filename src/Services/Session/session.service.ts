@@ -1,4 +1,4 @@
-import type { LoginDataType } from "@/Types";
+import type { LoginDataType, SignUpDataType } from "@/Types";
 
 import axios, { type AxiosResponse } from "axios";
 import { EntryLocalStorage } from "../LocalStorage";
@@ -24,5 +24,17 @@ export const SessionService = {
   },
   logout(): void {
     EntryLocalStorage.SESSION.logout();
+  },
+  // * USER
+  async createUser(signUpData: SignUpDataType): Promise<boolean> {
+    try {
+      const response: AxiosResponse<unknown> = await axios.post<unknown>(
+        BASE_URL.concat("/users/"),
+        signUpData
+      );
+      return response.status === 200;
+    } catch {
+      return false;
+    }
   },
 };

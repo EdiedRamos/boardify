@@ -12,3 +12,16 @@ export const TOAST_LOGIN = {
     status: TOAST_STATUS.ERROR,
   },
 };
+
+export const TOAST_SIGNUP = {
+  SUCCESS: {
+    title: "Success Registration",
+    description: "Now you can login",
+    status: TOAST_STATUS.SUCCESS,
+  },
+  FAILURE: {
+    title: "Wrong Data",
+    description: "Invalid username or email",
+    status: TOAST_STATUS.ERROR,
+  },
+};
