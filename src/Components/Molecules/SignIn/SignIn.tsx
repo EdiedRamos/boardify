@@ -53,16 +53,18 @@ export const SignIn = ({ ...props }: PropTypes): JSX.Element => {
                 </DrawerHeader>
                 <DrawerBody>
                   <Stack spacing="24px">
-                    <FormControl isRequired isInvalid={!!props.errors.email}>
-                      <FormLabel htmlFor="email">Email</FormLabel>
+                    <FormControl isRequired isInvalid={!!props.errors.username}>
+                      <FormLabel htmlFor="username">Username</FormLabel>
                       <Input
                         as={Field}
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="Enter your email"
+                        // type=""
+                        name="username"
+                        id="username"
+                        placeholder="Enter your username"
                       />
-                      <FormErrorMessage>{props.errors.email}</FormErrorMessage>
+                      <FormErrorMessage>
+                        {props.errors.username}
+                      </FormErrorMessage>
                     </FormControl>
                     <FormControl isRequired isInvalid={!!props.errors.password}>
                       <FormLabel htmlFor="password">Password</FormLabel>

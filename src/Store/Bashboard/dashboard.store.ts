@@ -11,7 +11,7 @@ import type {
 } from "@/Types";
 import type { ValuesType } from "@/Components/Organisms/AddTask/AddTaskController";
 
-export interface IDashboardState {
+export interface IDashboardStore {
   // * Properties
   boards: DashboardType;
   currentBoard: number | null | undefined;
@@ -25,7 +25,7 @@ export interface IDashboardState {
   addTask: (task: ValuesType) => void;
 }
 
-export const useDashboardStore = create<IDashboardState>()((set) => ({
+export const useDashboardStore = create<IDashboardStore>()((set) => ({
   // * Properties
   boards: { boardList: [] },
   currentBoard: null,

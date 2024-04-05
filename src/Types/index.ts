@@ -6,4 +6,6 @@ export type {
   BoardType,
   DashboardType,
   TaskGroupType,
-} from "./Dashboard/dashboard";
+} from "./Dashboard/dashboard.types";
+
+export type { LoginDataType } from "./Session/session.types";

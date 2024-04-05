@@ -1,26 +1,26 @@
-type ValuesType = {
-  email: string;
-  password: string;
-};
+import { useSessionStore } from "@/Store/Session/session.store";
+import type { LoginDataType } from "@/Types";
 
-type ValidateType = Partial<ValuesType>;
+type ValidateType = Partial<LoginDataType>;
 
 export const SignInController = () => {
-  const initialValues: ValuesType = {
-    email: "",
+  const { login } = useSessionStore();
+
+  const initialValues: LoginDataType = {
+    username: "",
     password: "",
   };
 
-  const onSubmit = (values: ValuesType): void => {
-    alert(JSON.stringify(values));
+  const onSubmit = (values: LoginDataType): void => {
+    login(values);
   };
 
-  const validate = (values: ValuesType): ValidateType => {
+  const validate = (values: LoginDataType): ValidateType => {
     const errors: ValidateType = {};
 
-    const isEmailEmpty = values.email.trim().length === 0;
+    const isEmailEmpty = values.username.trim().length === 0;
     if (isEmailEmpty) {
-      errors.email = "Email is required";
+      errors.username = "Email is required";
     }
 
     const isPasswordEmpty = values.password.trim().length === 0;
