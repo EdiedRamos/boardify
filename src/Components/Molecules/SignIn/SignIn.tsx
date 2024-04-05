@@ -30,7 +30,7 @@ type PropTypes = ButtonProps;
 export const SignIn = ({ ...props }: PropTypes): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isActive, toggle } = useToggle();
-  const { initialValues, onSubmit, validate } = SignInController();
+  const { initialValues, onSubmit, validate, isLoading } = SignInController();
 
   return (
     <>
@@ -90,7 +90,12 @@ export const SignIn = ({ ...props }: PropTypes): JSX.Element => {
                   </Stack>
                 </DrawerBody>
                 <DrawerFooter borderTopWidth="1px">
-                  <Button type="submit" colorScheme="blue" mr={3}>
+                  <Button
+                    type="submit"
+                    isDisabled={isLoading}
+                    colorScheme="blue"
+                    mr={3}
+                  >
                     Login
                   </Button>
                   <Button variant="outline" onClick={onClose}>

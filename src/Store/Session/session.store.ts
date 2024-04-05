@@ -8,7 +8,7 @@ export interface ISessionState {
   // * Properties
   isLogged: boolean;
   // * Methods
-  login: (data: LoginDataType) => void;
+  login: (data: LoginDataType) => Promise<boolean>;
   logout: () => void;
 }
 
@@ -19,10 +19,11 @@ export const useSessionStore = create<ISessionState>()((set) => ({
   // * Methods
   async login(data: LoginDataType) {
     const loginStatus = await SessionService.login(data);
-    if (!loginStatus) return;
+    if (!loginStatus) return false;
     set(() => ({
       isLogged: true,
     }));
+    return true;
   },
 
   logout() {
