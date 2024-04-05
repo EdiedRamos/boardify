@@ -11,17 +11,24 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Icon,
   Input,
+  InputGroup,
+  InputRightElement,
   Stack,
   useDisclosure,
 } from "@chakra-ui/react";
-import { SignUpController } from "./SignUpController";
 import { Field, Form, Formik } from "formik";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
+import { useToggle } from "@/Core/Hooks";
+import { SignUpController } from "./SignUpController";
 
 type PropTypes = ButtonProps;
 
 export const SignUp = ({ ...props }: PropTypes): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isActive, toggle } = useToggle();
 
   const { initialValues, onSubmit, validate } = SignUpController();
 
@@ -66,11 +73,19 @@ export const SignUp = ({ ...props }: PropTypes): JSX.Element => {
                     {/* password */}
                     <FormControl isRequired isInvalid={!!errors.password}>
                       <FormLabel>Password</FormLabel>
-                      <Input
-                        as={Field}
-                        name="password"
-                        placeholder="Enter your password"
-                      />
+                      <InputGroup>
+                        <Input
+                          as={Field}
+                          type={isActive ? "text" : "password"}
+                          name="password"
+                          placeholder="Enter your password"
+                        />
+                        <InputRightElement>
+                          <Button onClick={toggle}>
+                            <Icon as={isActive ? FaEyeSlash : FaEye} />
+                          </Button>
+                        </InputRightElement>
+                      </InputGroup>
                       <FormErrorMessage>{errors.password}</FormErrorMessage>
                     </FormControl>
                   </Stack>
