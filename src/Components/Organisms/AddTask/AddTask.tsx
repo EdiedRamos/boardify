@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import {
   Button,
   Flex,
@@ -18,11 +17,13 @@ import {
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
-
 import { Field, FieldArray, Form, Formik } from "formik";
-import { AddTaskController } from "./AddTaskController";
-
+import { useRef } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
+
+import { SessionMiddleware } from "@/Components/Middlewares";
+
+import { AddTaskController } from "./AddTaskController";
 
 export const AddTask = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -34,7 +35,7 @@ export const AddTask = (): JSX.Element => {
   const initialRef = useRef(null);
 
   return (
-    <>
+    <SessionMiddleware fallback={<></>}>
       <Button colorScheme="messenger" onClick={onOpen} isDisabled={isDisabled}>
         + New Task
       </Button>
@@ -146,6 +147,6 @@ export const AddTask = (): JSX.Element => {
           </Formik>
         </ModalContent>
       </Modal>
-    </>
+    </SessionMiddleware>
   );
 };

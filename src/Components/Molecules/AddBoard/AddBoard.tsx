@@ -1,3 +1,5 @@
+import { HiddenBlock } from "@/Components/Atoms";
+import { SessionMiddleware } from "@/Components/Middlewares";
 import { NavItem } from "@/Components/Molecules";
 import { BoardForm } from "@/Components/Organisms";
 import { IoIosCreate } from "react-icons/io";
@@ -8,12 +10,14 @@ type PropsType = {
 
 export const AddBoard = ({ onFinish }: PropsType) => {
   return (
-    <BoardForm isCreating onFinish={onFinish}>
-      {(props) => (
-        <NavItem icon={IoIosCreate} onClick={props.onClick}>
-          + Create Board
-        </NavItem>
-      )}
-    </BoardForm>
+    <SessionMiddleware fallback={<HiddenBlock />}>
+      <BoardForm isCreating onFinish={onFinish}>
+        {(props) => (
+          <NavItem icon={IoIosCreate} onClick={props.onClick}>
+            + Create Board
+          </NavItem>
+        )}
+      </BoardForm>
+    </SessionMiddleware>
   );
 };
