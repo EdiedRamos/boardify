@@ -25,9 +25,9 @@ import { useToggle } from "@/Core/Hooks";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
-type PropTypes = ButtonProps;
+type PropTypes = ButtonProps & { text?: string };
 
-export const SignIn = ({ ...props }: PropTypes): JSX.Element => {
+export const SignIn = ({ text, ...props }: PropTypes): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isActive, toggle } = useToggle();
   const { initialValues, onSubmit, validate, isLoading } = SignInController();
@@ -35,7 +35,7 @@ export const SignIn = ({ ...props }: PropTypes): JSX.Element => {
   return (
     <>
       <Button w={"full"} onClick={onOpen} {...props}>
-        SignIn
+        {text ?? "SignIn"}
       </Button>
       <Drawer isOpen={isOpen} placement="right" size="sm" onClose={onClose}>
         <DrawerOverlay />
