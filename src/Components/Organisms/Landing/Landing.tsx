@@ -1,14 +1,5 @@
-import {
-  Box,
-  Heading,
-  Container,
-  Text,
-  Stack,
-  Icon,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
 
-import { Arrow } from "@/Components/Atoms";
 import { SignIn, SignUp } from "@/Components/Molecules";
 
 export const Landing = () => {
@@ -43,7 +34,6 @@ export const Landing = () => {
             spacing={3}
             align={"center"}
             alignSelf={"center"}
-            position={"relative"}
           >
             <SignIn
               text="Get Started"
@@ -61,26 +51,6 @@ export const Landing = () => {
               colorScheme={"blue"}
               size={"sm"}
             />
-            <Box>
-              <Icon
-                as={Arrow}
-                color={useColorModeValue("yellow.500", "yellow.300")}
-                w={71}
-                position={"absolute"}
-                right={-71}
-                top={"10px"}
-              />
-              <Text
-                fontSize={"lg"}
-                fontFamily={"Caveat"}
-                position={"absolute"}
-                right={"-125px"}
-                top={"-15px"}
-                transform={"rotate(10deg)"}
-              >
-                Starting at $1/mo
-              </Text>
-            </Box>
           </Stack>
         </Stack>
       </Container>
