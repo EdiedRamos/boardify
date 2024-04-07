@@ -16,7 +16,6 @@ import {
   InputGroup,
   InputRightElement,
   Stack,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -27,10 +26,17 @@ import { SignUpController } from "./SignUpController";
 type PropTypes = ButtonProps & { text?: string };
 
 export const SignUp = ({ text, ...props }: PropTypes): JSX.Element => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const { isActive, toggle } = useToggle();
 
-  const { initialValues, onSubmit, validate, isLoading } = SignUpController();
+  const {
+    initialValues,
+    onSubmit,
+    validate,
+    isLoading,
+    isOpen,
+    onOpen,
+    onClose,
+  } = SignUpController();
 
   return (
     <>

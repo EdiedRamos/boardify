@@ -2,6 +2,7 @@ import { useLocalToast } from "@/Core/Hooks";
 import { TOAST_SIGNUP } from "@/Domain/Constants";
 import { SessionService } from "@/Services/Session/session.service";
 import type { SignUpDataType } from "@/Types";
+import { useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 
 type ValidateType = Partial<SignUpDataType>;
@@ -13,6 +14,8 @@ export const SignUpController = () => {
     password: "",
   };
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const toast = useLocalToast();
@@ -23,6 +26,7 @@ export const SignUpController = () => {
       .then((status) => {
         if (status) {
           toast.fire(TOAST_SIGNUP.SUCCESS);
+          onClose();
         } else {
           toast.fire(TOAST_SIGNUP.FAILURE);
         }
@@ -51,5 +55,13 @@ export const SignUpController = () => {
     return errors;
   };
 
-  return { initialValues, onSubmit, validate, isLoading };
+  return {
+    initialValues,
+    onSubmit,
+    validate,
+    isLoading,
+    isOpen,
+    onOpen,
+    onClose,
+  };
 };
