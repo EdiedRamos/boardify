@@ -1,9 +1,9 @@
 import type { LoginDataType, SignUpDataType } from "@/Types";
 
 import axios, { type AxiosResponse } from "axios";
-import { EntryLocalStorage } from "../LocalStorage";
 
-const BASE_URL = "https://loving-proud-gnat.ngrok-free.app";
+import { API_BASE_URL } from "@/Domain/Constants";
+import { EntryLocalStorage } from "../LocalStorage";
 
 type LoginResponse = {
   refreshToken: string;
@@ -14,7 +14,7 @@ export const SessionService = {
   async login(loginData: LoginDataType): Promise<boolean> {
     const response: AxiosResponse<LoginResponse> =
       await axios.post<LoginResponse>(
-        BASE_URL.concat("/auth/login/"),
+        API_BASE_URL.concat("/auth/login/"),
         loginData
       );
     // TODO: Use the status code
@@ -29,7 +29,7 @@ export const SessionService = {
   async createUser(signUpData: SignUpDataType): Promise<boolean> {
     try {
       const response: AxiosResponse<unknown> = await axios.post<unknown>(
-        BASE_URL.concat("/users/"),
+        API_BASE_URL.concat("/users/"),
         signUpData
       );
       return response.status === 200;

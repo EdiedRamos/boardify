@@ -10,6 +10,7 @@ import type {
   SubtaskType,
 } from "@/Types";
 import type { ValuesType } from "@/Components/Organisms/AddTask/AddTaskController";
+import { DashboardService } from "@/Services";
 
 export interface IDashboardStore {
   // * Properties
@@ -38,12 +39,15 @@ export const useDashboardStore = create<IDashboardStore>()((set) => ({
       currentBoard: boardId,
     }));
   },
-  addBoard(board) {
+  async addBoard(board) {
+    await DashboardService.createBoard(board);
+
     const newBoard: BoardType = {
       id: 12,
       name: board.name,
       taskGroupList: [],
     };
+
     set((store) => ({
       boards: {
         boardList: [...store.boards.boardList, newBoard],
