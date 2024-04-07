@@ -6,7 +6,7 @@ export const LocalStorageService = {
       return toObj;
     } catch (error) {
       if (error instanceof Error) {
-        console.error("localStorageService.getItem: ", error.message);
+        console.warn("localStorageService.getItem: ", error.message);
       }
       return data;
     }
@@ -16,7 +16,7 @@ export const LocalStorageService = {
       localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
       if (error instanceof Error) {
-        console.error("localStorageService.getItem: ", error.message);
+        console.warn("localStorageService.getItem: ", error.message);
       }
     }
   },
