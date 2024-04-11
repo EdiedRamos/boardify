@@ -1,38 +1,31 @@
+import type { BoardType, TaskGroupBaseType } from "@/Types";
+
 import { create } from "zustand";
 
-import type {
-  DashboardType,
-  BoardType,
-  BoardBaseType,
-  TaskGroupBaseType,
-  TaskGroupType,
-  TaskType,
-  SubtaskType,
-} from "@/Types";
 import type { ValuesType } from "@/Components/Organisms/AddTask/AddTaskController";
-import { DashboardService } from "@/Services";
+import { BoardService } from "@/Services";
 
-export interface IDashboardStore {
-  // * Properties
-  boards: DashboardType;
-  currentBoard: number | null | undefined;
-  // * Methods
-  setBoards: (boards: DashboardType) => void;
-  setCurrentBoard: (boardId: number) => void;
-  addBoard: (board: Omit<BoardBaseType, "id">) => void;
-  updateBoard: (board: Omit<BoardBaseType, "id">) => void;
+export interface DashboardStoreI {
+  boards: BoardType[];
+  currentBoard: string | null | undefined;
+  setBoards: () => void;
+  setCurrentBoard: (boardId: string) => void;
+  addBoard: (board: Omit<BoardType, "id">) => void;
+  updateBoard: (board: Omit<BoardType, "id">) => void;
   deleteBoard: () => void;
   addTaskGroup: (taskGroup: Omit<TaskGroupBaseType, "id">) => void;
   addTask: (task: ValuesType) => void;
 }
 
-export const useDashboardStore = create<IDashboardStore>()((set) => ({
-  // * Properties
-  boards: { boardList: [] },
+export const useDashboardStore = create<DashboardStoreI>()((set) => ({
+  boards: [],
   currentBoard: null,
-  // * Methods
-  setBoards(boards: DashboardType) {
-    set(() => ({ boards: boards }));
+  async setBoards() {
+    const boards = await BoardService.getAllBoards();
+    set(() => ({
+      boards: boards,
+      currentBoard: boards[0]?.id,
+    }));
   },
   setCurrentBoard(boardId) {
     set(() => ({
@@ -40,103 +33,32 @@ export const useDashboardStore = create<IDashboardStore>()((set) => ({
     }));
   },
   async addBoard(board) {
-    await DashboardService.createBoard(board);
-
-    const newBoard: BoardType = {
-      id: 12,
-      name: board.name,
-      taskGroupList: [],
-    };
-
+    const newBoard = await BoardService.createBoard(board);
+    if (newBoard === null) return;
     set((store) => ({
-      boards: {
-        boardList: [...store.boards.boardList, newBoard],
-      },
-      currentBoard: 12,
+      boards: [...store.boards, newBoard],
+      currentBoard: newBoard.id,
     }));
   },
   updateBoard(board) {
-    set((store) => {
-      return {
-        boards: {
-          boardList: store.boards.boardList.map((currentBoard) => {
-            if (currentBoard.id === store.currentBoard) {
-              return {
-                ...currentBoard,
-                ...board,
-              };
-            }
-            return currentBoard;
-          }),
-        },
-      };
-    });
+    console.log(board);
   },
-  deleteBoard() {
-    set((store) => ({
-      boards: {
-        boardList: store.boards.boardList.filter(
-          (board) => board.id !== store.currentBoard
-        ),
-      },
-    }));
-    set((store) => ({
-      currentBoard: store.boards.boardList[0]?.id,
+  async deleteBoard() {
+    const { currentBoard, boards } = useDashboardStore.getState();
+    if (!currentBoard) return;
+    const status = await BoardService.deleteBoard(currentBoard.toString());
+    if (!status) return;
+    const newBoardsList = boards.filter((board) => board.id !== currentBoard);
+    const newCurrentBoard = newBoardsList[0]?.id;
+    set(() => ({
+      boards: newBoardsList,
+      currentBoard: newCurrentBoard,
     }));
   },
   addTaskGroup(taskGroup) {
-    const newTaskGroup: TaskGroupType = {
-      id: 12,
-      status: taskGroup.status,
-      taskList: [],
-    };
-    set((store) => {
-      return {
-        boards: {
-          boardList: store.boards.boardList.map((board) =>
-            board.id === store.currentBoard
-              ? {
-                  ...board,
-                  taskGroupList: [...board.taskGroupList, newTaskGroup],
-                }
-              : board
-          ),
-        },
-      };
-    });
+    console.log(taskGroup);
   },
   addTask(task) {
-    set((store) => {
-      const newTask: TaskType = {
-        id: 123,
-        title: task.title,
-        description: task.description,
-        status: { id: +task.status, status: "something" },
-        subtaskList: task.subtaskList.map((subtask): SubtaskType => {
-          return {
-            id: 1,
-            state: false,
-            title: subtask.title,
-          };
-        }),
-      };
-
-      return {
-        boards: {
-          boardList: store.boards.boardList.map((board) =>
-            board.id === store.currentBoard
-              ? {
-                  ...board,
-                  taskGroupList: board.taskGroupList.map((group) =>
-                    group.id === newTask.status.id
-                      ? { ...group, taskList: [...group.taskList, newTask] }
-                      : group
-                  ),
-                }
-              : board
-          ),
-        },
-      };
-    });
+    console.log(task);
   },
 }));

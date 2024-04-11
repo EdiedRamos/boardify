@@ -1,8 +1,3 @@
-export type BoardBaseType = {
-  id: number;
-  name: string;
-};
-
 export type TaskGroupBaseType = {
   id: number;
   status: string;
@@ -15,7 +10,7 @@ export type SubtaskType = {
 };
 
 export type TaskType = {
-  id: number;
+  id: string;
   title: string;
   description: string;
   status: TaskGroupBaseType;
@@ -24,12 +19,4 @@ export type TaskType = {
 
 export type TaskGroupType = TaskGroupBaseType & {
   taskList: TaskType[];
-};
-
-export type BoardType = BoardBaseType & {
-  taskGroupList: TaskGroupType[];
-};
-
-export type DashboardType = {
-  boardList: BoardType[];
 };

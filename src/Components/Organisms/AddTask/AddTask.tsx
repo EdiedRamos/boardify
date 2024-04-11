@@ -118,7 +118,7 @@ export const AddTask = (): JSX.Element => {
                   {/* STATUS */}
                   <FormControl isRequired isInvalid={!!props.errors.status}>
                     <FormLabel>Status</FormLabel>
-                    <Field
+                    {/* <Field
                       as={Select}
                       name="status"
                       placeholder="Select the status"
@@ -131,7 +131,7 @@ export const AddTask = (): JSX.Element => {
                           {id}
                         </option>
                       ))}
-                    </Field>
+                    </Field> */}
                     <FormErrorMessage>{props.errors.status}</FormErrorMessage>
                   </FormControl>
                 </ModalBody>

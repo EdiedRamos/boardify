@@ -13,7 +13,8 @@ type AddBoardControllerType = {
 };
 
 export const AddTaskController = ({ onClose }: AddBoardControllerType) => {
-  const { addTask, boards, currentBoard } = useDashboardStore();
+  // const { addTask, boards, currentBoard } = useDashboardStore();
+  const { addTask } = useDashboardStore();
 
   const initialValues: ValuesType = {
     title: "",
@@ -52,13 +53,7 @@ export const AddTaskController = ({ onClose }: AddBoardControllerType) => {
     initialValues,
     onSubmit,
     validate,
-    isDisabled:
-      currentBoard === null || currentBoard === undefined
-        ? true
-        : boards.boardList.find((board) => board.id === currentBoard)
-            ?.taskGroupList.length === 0,
-    taskGroupList: boards.boardList
-      .find((board) => board.id === currentBoard)
-      ?.taskGroupList.map(({ id, status }) => ({ id, status })),
+    isDisabled: true,
+    taskGroupList: [],
   };
 };

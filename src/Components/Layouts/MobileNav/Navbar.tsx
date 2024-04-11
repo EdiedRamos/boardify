@@ -55,7 +55,7 @@ export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
             whiteSpace="nowrap"
             verticalAlign="middle"
           >
-            {boards.boardList.find((board) => board.id === currentBoard)?.name}
+            {boards.find((board) => board.id === currentBoard)?.name}
           </Text>
         </Center>
       </Flex>

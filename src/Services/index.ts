@@ -1,2 +1,2 @@
-export { DashboardService } from "./Dashboard/dashboard.service";
+export { BoardService } from "./Board/board.service";
 export { EntryDecoded } from "./Decode";

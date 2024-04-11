@@ -6,7 +6,8 @@ import { AddTaskGroup, Landing, TaskColumn } from "@/Components/Organisms";
 import { useDashboardStore } from "@/Store";
 
 export const Board = (): JSX.Element => {
-  const { boards, currentBoard } = useDashboardStore();
+  // const { boards, currentBoard } = useDashboardStore();
+  const { currentBoard } = useDashboardStore();
 
   return (
     <SessionMiddleware fallback={<Landing />}>
@@ -21,11 +22,11 @@ export const Board = (): JSX.Element => {
           gap={5}
           p="4"
         >
-          {boards.boardList
+          {/* {boards
             .find((board) => board.id === currentBoard)
             ?.taskGroupList.map((board, index) => (
               <TaskColumn {...{ ...board, index }} />
-            ))}
+            ))} */}
           <AddTaskGroup />
         </Box>
       )}

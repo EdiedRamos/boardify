@@ -1,7 +1,7 @@
 import { useDashboardStore } from "@/Store";
-import type { BoardBaseType } from "@/Types";
+import type { BoardType } from "@/Types";
 
-type ValuesType = Omit<BoardBaseType, "id">;
+type ValuesType = Omit<BoardType, "id">;
 
 type AddBoardControllerType = {
   onFinish?: () => void;

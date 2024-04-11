@@ -1,12 +1,11 @@
 export type {
-  BoardBaseType,
-  BoardType,
-  DashboardType,
   SubtaskType,
   TaskGroupBaseType,
   TaskGroupType,
   TaskType,
 } from "./Dashboard/dashboard.types";
+
+export type { BoardType, GetAllBoardsI } from "./Dashboard/board.types";
 
 export type { LoginDataType, SignUpDataType } from "./Session/session.types";
 
