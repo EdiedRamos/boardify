@@ -7,9 +7,9 @@ import { BoardService } from "@/Services";
 
 export interface DashboardStoreI {
   boards: BoardType[];
-  currentBoard: string | null | undefined;
+  currentBoard: BoardType | null | undefined;
   setBoards: () => void;
-  setCurrentBoard: (boardId: string) => void;
+  setCurrentBoard: (board: BoardType) => void;
   addBoard: (board: Omit<BoardType, "id">) => void;
   updateBoard: (board: Omit<BoardType, "id">) => void;
   deleteBoard: () => void;
@@ -24,20 +24,22 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
     const boards = await BoardService.getAllBoards();
     set(() => ({
       boards: boards,
-      currentBoard: boards[0]?.id,
+      currentBoard: boards[0],
     }));
   },
-  setCurrentBoard(boardId) {
-    set(() => ({
-      currentBoard: boardId,
-    }));
+  setCurrentBoard(board) {
+    set(() => {
+      return {
+        currentBoard: board,
+      };
+    });
   },
   async addBoard(board) {
     const newBoard = await BoardService.createBoard(board);
     if (newBoard === null) return;
     set((store) => ({
       boards: [...store.boards, newBoard],
-      currentBoard: newBoard.id,
+      currentBoard: newBoard,
     }));
   },
   updateBoard(board) {
@@ -46,10 +48,12 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
   async deleteBoard() {
     const { currentBoard, boards } = useDashboardStore.getState();
     if (!currentBoard) return;
-    const status = await BoardService.deleteBoard(currentBoard.toString());
+    const status = await BoardService.deleteBoard(currentBoard.id);
     if (!status) return;
-    const newBoardsList = boards.filter((board) => board.id !== currentBoard);
-    const newCurrentBoard = newBoardsList[0]?.id;
+    const newBoardsList = boards.filter(
+      (board) => board.id !== currentBoard.id
+    );
+    const newCurrentBoard = newBoardsList[0];
     set(() => ({
       boards: newBoardsList,
       currentBoard: newCurrentBoard,

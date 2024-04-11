@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import { FiMenu } from "react-icons/fi";
 
-// just trying Zustand
 import { useDashboardStore } from "@/Store";
 import { AddTask } from "@/Components/Organisms";
 
@@ -18,10 +17,8 @@ interface NavbarProps extends FlexProps {
   onOpen: () => void;
 }
 
-// TODO: Improve current board name searching
-
 export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
-  const { boards, currentBoard } = useDashboardStore();
+  const { currentBoard } = useDashboardStore();
 
   return (
     <Flex
@@ -55,7 +52,7 @@ export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
             whiteSpace="nowrap"
             verticalAlign="middle"
           >
-            {boards.find((board) => board.id === currentBoard)?.name}
+            {currentBoard?.name}
           </Text>
         </Center>
       </Flex>

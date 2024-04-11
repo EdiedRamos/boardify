@@ -14,10 +14,10 @@ export const BoardFormController = ({
   isCreating,
   onFinish,
 }: AddBoardControllerType) => {
-  const { addBoard, updateBoard } = useDashboardStore();
+  const { addBoard, updateBoard, currentBoard } = useDashboardStore();
 
   const initialValues: ValuesType = {
-    name: "",
+    name: isCreating ? "" : currentBoard?.name ?? "",
   };
 
   const onCreate = (values: ValuesType): void => {

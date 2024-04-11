@@ -59,17 +59,17 @@ export const SidebarContent = ({
         </Flex>
       </Flex>
       <Stack h={"70%"} overflowY={"auto"}>
-        {boards.map((link) => (
+        {boards.map((board) => (
           <NavItem
-            key={link.id}
-            bg={currentBoard === link.id ? "purple.400" : undefined}
+            key={board.id}
+            bg={currentBoard?.id === board.id ? "purple.400" : undefined}
             icon={TbLayoutDashboard}
             onClick={() => {
-              setCurrentBoard(link.id);
+              setCurrentBoard(board);
               onClose();
             }}
           >
-            {link.name}
+            {board.name}
           </NavItem>
         ))}
       </Stack>
