@@ -3,7 +3,7 @@ import type { BoardType, TaskGroupBaseType, TopicType } from "@/Types";
 import { create } from "zustand";
 
 import type { ValuesType } from "@/Components/Organisms/AddTask/AddTaskController";
-import { BoardService } from "@/Services";
+import { BoardService, TopicService } from "@/Services";
 
 export interface DashboardStoreI {
   boards: BoardType[];
@@ -64,7 +64,14 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
       currentBoard: newCurrentBoard,
     }));
   },
-  async setTopics() {},
+  async setTopics() {
+    const { currentBoard } = useDashboardStore.getState();
+    if (!currentBoard) return;
+    const topics = await TopicService.getAllTopics(currentBoard.id);
+    set(() => ({
+      topics,
+    }));
+  },
   async addTopic(topic) {
     const newTopic: TopicType = {
       id: crypto.randomUUID(),

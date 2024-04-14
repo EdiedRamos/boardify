@@ -1,6 +1,6 @@
 import { type AxiosResponse } from "axios";
 
-import type { BoardType, GetAllBoardsI } from "@/Types";
+import type { BoardType, GetAllTopicsI, TopicType } from "@/Types";
 
 import { baseAxios } from "@/Domain/Config";
 
@@ -18,10 +18,10 @@ export const TopicService = {
     }
   },
 
-  async getAllTopics(): Promise<Array<BoardType>> {
+  async getAllTopics(boardId: string): Promise<Array<TopicType>> {
     try {
-      const response: AxiosResponse<GetAllBoardsI> =
-        await baseAxios.get<GetAllBoardsI>("boards/");
+      const response: AxiosResponse<GetAllTopicsI> =
+        await baseAxios.get<GetAllTopicsI>(`boards/${boardId}/topics/`);
       return response.data.content;
     } catch {
       return [];

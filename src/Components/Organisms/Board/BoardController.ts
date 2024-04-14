@@ -2,11 +2,17 @@ import { useDashboardStore } from "@/Store";
 import { useEffect } from "react";
 
 export const BoardController = () => {
-  const { setBoards, currentBoard, topics } = useDashboardStore();
+  const { setBoards, setTopics, currentBoard, topics } = useDashboardStore();
 
   useEffect(() => {
     setBoards();
-  }, [setBoards]);
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    setTopics();
+    // eslint-disable-next-line
+  }, [currentBoard]);
 
   useEffect(() => {}, [currentBoard]);
 

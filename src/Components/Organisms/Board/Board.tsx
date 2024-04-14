@@ -22,7 +22,7 @@ export const Board = (): JSX.Element => {
           p="4"
         >
           {topics.map((topic, index) => (
-            <TaskColumn {...{ ...topic, index }} />
+            <TaskColumn key={topic.id} {...{ ...topic, index }} />
           ))}
           <AddTopic />
         </Box>
