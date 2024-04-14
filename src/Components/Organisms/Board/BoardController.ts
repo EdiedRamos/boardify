@@ -2,7 +2,8 @@ import { useDashboardStore } from "@/Store";
 import { useEffect } from "react";
 
 export const BoardController = () => {
-  const { setBoards, setTopics, currentBoard, topics } = useDashboardStore();
+  const { setBoards, setTopics, currentBoard, topics, isLoadingTopics } =
+    useDashboardStore();
 
   useEffect(() => {
     setBoards();
@@ -19,5 +20,6 @@ export const BoardController = () => {
   return {
     currentBoard,
     topics,
+    isLoadingTopics,
   };
 };

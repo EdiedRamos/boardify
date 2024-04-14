@@ -14,6 +14,7 @@ export interface DashboardStoreI {
   currentBoard: BoardType | null | undefined;
   setCurrentBoard: (board: BoardType) => void;
   topics: TopicType[];
+  isLoadingTopics: boolean;
   setTopics: () => void;
   addTopic: (topic: Omit<TopicType, "id">) => void;
   addTaskGroup: (taskGroup: Omit<TaskGroupBaseType, "id">) => void;
@@ -24,6 +25,7 @@ export interface DashboardStoreI {
 export const useDashboardStore = create<DashboardStoreI>()((set) => ({
   boards: [],
   topics: [],
+  isLoadingTopics: false,
   currentBoard: null,
   async setBoards() {
     const boards = await BoardService.getAllBoards();
@@ -68,9 +70,13 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
   async setTopics() {
     const { currentBoard } = useDashboardStore.getState();
     if (!currentBoard) return;
+    set(() => ({
+      isLoadingTopics: true,
+    }));
     const topics = await TopicService.getAllTopics(currentBoard.id);
     set(() => ({
       topics,
+      isLoadingTopics: false,
     }));
   },
   async addTopic(topic) {

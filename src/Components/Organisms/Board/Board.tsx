@@ -4,9 +4,10 @@ import { EmptySection } from "@/Components/Molecules";
 import { AddTopic, TaskColumn } from "@/Components/Organisms";
 
 import { BoardController } from "./BoardController";
+import { CircularLoader } from "@/Components/Atoms";
 
 export const Board = (): JSX.Element => {
-  const { currentBoard, topics } = BoardController();
+  const { currentBoard, topics, isLoadingTopics } = BoardController();
 
   return (
     <>
@@ -21,10 +22,15 @@ export const Board = (): JSX.Element => {
           gap={5}
           p="4"
         >
-          {topics.map((topic, index) => (
-            <TaskColumn key={topic.id} {...{ ...topic, index }} />
-          ))}
-          <AddTopic />
+          <CircularLoader show={isLoadingTopics} />
+          {!isLoadingTopics && (
+            <>
+              {topics.map((topic, index) => (
+                <TaskColumn key={topic.id} {...{ ...topic, index }} />
+              ))}
+              <AddTopic />
+            </>
+          )}
         </Box>
       )}
     </>
