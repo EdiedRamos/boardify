@@ -3,8 +3,8 @@ import { Box } from "@chakra-ui/react";
 import { EmptySection } from "@/Components/Molecules";
 import { AddTopic, TaskColumn } from "@/Components/Organisms";
 
-import { BoardController } from "./BoardController";
 import { CircularLoader, RenderWrapper } from "@/Components/Atoms";
+import { BoardController } from "./BoardController";
 
 export const Board = (): JSX.Element => {
   const { currentBoard, topics, isLoadingTopics } = BoardController();

@@ -58,6 +58,7 @@ export const SidebarContent = ({
           <NavItem
             key={board.id}
             bg={currentBoard?.id === board.id ? "purple.400" : undefined}
+            color={currentBoard?.id === board.id ? "white" : undefined}
             icon={TbLayoutDashboard}
             onClick={() => {
               setCurrentBoard(board);
