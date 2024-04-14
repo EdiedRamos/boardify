@@ -5,6 +5,11 @@ export type TopicType = {
   name: string;
 };
 
+export type TopicBodyType = {
+  name: string;
+  boardId: string;
+};
+
 // * Response type
 export interface GetAllTopicsI extends ResponseI {
   content: TopicType[];

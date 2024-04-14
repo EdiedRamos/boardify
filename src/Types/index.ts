@@ -1,11 +1,6 @@
-export type { BoardType, GetAllBoardsI } from "./Dashboard/board.types";
-export type {
-  SubtaskType,
-  TaskGroupBaseType,
-  TaskGroupType,
-  TaskType,
-} from "./Dashboard/dashboard.types";
-export type { TaskPreviewType } from "./Dashboard/task.types";
-export type { TopicType, GetAllTopicsI } from "./Dashboard/topic.types";
-export type { LoginDataType, SignUpDataType } from "./Session/session.types";
-export type { ToastStatusType } from "./Toast/toast.types";
+export type * from "./Dashboard/board.types";
+export type * from "./Dashboard/dashboard.types";
+export type * from "./Dashboard/task.types";
+export type * from "./Dashboard/topic.types";
+export type * from "./Session/session.types";
+export type * from "./Toast/toast.types";

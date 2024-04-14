@@ -1,14 +1,15 @@
 import { type AxiosResponse } from "axios";
 
-import type { BoardType, GetAllTopicsI, TopicType } from "@/Types";
+import type { GetAllTopicsI, TopicType } from "@/Types";
 
 import { baseAxios } from "@/Domain/Config";
+import { TopicBodyType } from "@/Types";
 
 export const TopicService = {
-  async createTopic(board: Omit<BoardType, "id">): Promise<BoardType | null> {
+  async createTopic(body: TopicBodyType): Promise<TopicType | null> {
     try {
-      const response: AxiosResponse<BoardType> =
-        await baseAxios.post<BoardType>("boards/", board);
+      const response: AxiosResponse<TopicType> =
+        await baseAxios.post<TopicType>("topics/", body);
       if (response.status === 201) {
         return response.data;
       }

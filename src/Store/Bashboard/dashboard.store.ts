@@ -73,10 +73,13 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
     }));
   },
   async addTopic(topic) {
-    const newTopic: TopicType = {
-      id: crypto.randomUUID(),
-      name: topic.name,
-    };
+    const { currentBoard } = useDashboardStore.getState();
+    if (!currentBoard) return;
+    const newTopic = await TopicService.createTopic({
+      ...topic,
+      boardId: currentBoard.id,
+    });
+    if (newTopic === null) return;
     set((store) => ({ topics: [...store.topics, newTopic] }));
   },
   addTaskGroup(taskGroup) {
