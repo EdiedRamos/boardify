@@ -4,7 +4,7 @@ import { EmptySection } from "@/Components/Molecules";
 import { AddTopic, TaskColumn } from "@/Components/Organisms";
 
 import { BoardController } from "./BoardController";
-import { CircularLoader } from "@/Components/Atoms";
+import { CircularLoader, RenderWrapper } from "@/Components/Atoms";
 
 export const Board = (): JSX.Element => {
   const { currentBoard, topics, isLoadingTopics } = BoardController();
@@ -23,14 +23,12 @@ export const Board = (): JSX.Element => {
           p="4"
         >
           <CircularLoader show={isLoadingTopics} />
-          {!isLoadingTopics && (
-            <>
-              {topics.map((topic, index) => (
-                <TaskColumn key={topic.id} {...{ ...topic, index }} />
-              ))}
-              <AddTopic />
-            </>
-          )}
+          <RenderWrapper render={!isLoadingTopics}>
+            {topics.map((topic, index) => (
+              <TaskColumn key={topic.id} {...{ ...topic, index }} />
+            ))}
+            <AddTopic />
+          </RenderWrapper>
         </Box>
       )}
     </>
