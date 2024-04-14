@@ -9,7 +9,7 @@ export interface DashboardStoreI {
   boards: BoardType[];
   setBoards: () => void;
   addBoard: (board: Omit<BoardType, "id">) => void;
-  updateBoard: (board: Omit<BoardType, "id">) => void;
+  updateBoard: (board: BoardType) => void;
   deleteBoard: () => void;
   currentBoard: BoardType | null | undefined;
   setCurrentBoard: (board: BoardType) => void;
@@ -50,8 +50,13 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
       currentBoard: newBoard,
     }));
   },
-  updateBoard(board) {
-    console.log(board);
+  async updateBoard(board) {
+    const updated = await BoardService.updateBoard(board);
+    set((store) => ({
+      boards: store.boards.map((board) =>
+        board.id === updated.id ? updated : board
+      ),
+    }));
   },
   async deleteBoard() {
     const { currentBoard, boards } = useDashboardStore.getState();

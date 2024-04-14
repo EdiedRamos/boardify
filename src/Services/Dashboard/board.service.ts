@@ -30,6 +30,17 @@ export const BoardService = {
     }
   },
 
+  async updateBoard(board: BoardType): Promise<BoardType> {
+    try {
+      const response: AxiosResponse<BoardType> = await baseAxios
+        .create()
+        .put(`boards/${board.id}/`, board);
+      return response.data;
+    } catch {
+      return board;
+    }
+  },
+
   async deleteBoard(boardId: string): Promise<boolean> {
     try {
       await baseAxios.create().delete<unknown>(`boards/${boardId}/`);

@@ -25,7 +25,11 @@ export const BoardFormController = ({
   };
 
   const onUpdate = (values: ValuesType): void => {
-    updateBoard(values);
+    if (!currentBoard) return;
+    updateBoard({
+      ...values,
+      id: currentBoard.id,
+    });
   };
 
   const onSubmit = (values: ValuesType): void => {
