@@ -8,8 +8,9 @@ import { TopicBodyType } from "@/Types";
 export const TopicService = {
   async createTopic(body: TopicBodyType): Promise<TopicType | null> {
     try {
-      const response: AxiosResponse<TopicType> =
-        await baseAxios.post<TopicType>("topics/", body);
+      const response: AxiosResponse<TopicType> = await baseAxios
+        .create()
+        .post<TopicType>("topics/", body);
       if (response.status === 201) {
         return response.data;
       }
@@ -21,8 +22,9 @@ export const TopicService = {
 
   async getAllTopics(boardId: string): Promise<Array<TopicType>> {
     try {
-      const response: AxiosResponse<GetAllTopicsI> =
-        await baseAxios.get<GetAllTopicsI>(`boards/${boardId}/topics/`);
+      const response: AxiosResponse<GetAllTopicsI> = await baseAxios
+        .create()
+        .get<GetAllTopicsI>(`boards/${boardId}/topics/`);
       return response.data.content;
     } catch {
       return [];
@@ -31,9 +33,9 @@ export const TopicService = {
 
   async deleteTopic(boardId: string): Promise<boolean> {
     try {
-      const response: AxiosResponse<unknown> = await baseAxios.delete<unknown>(
-        `boards/${boardId}/`
-      );
+      const response: AxiosResponse<unknown> = await baseAxios
+        .create()
+        .delete<unknown>(`boards/${boardId}/`);
       console.log({ response });
       return true;
     } catch {
