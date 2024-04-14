@@ -36,6 +36,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
     set(() => {
       return {
         currentBoard: board,
+        topics: [],
       };
     });
   },
