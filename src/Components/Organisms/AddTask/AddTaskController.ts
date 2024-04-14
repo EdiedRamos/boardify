@@ -14,7 +14,7 @@ type AddBoardControllerType = {
 
 export const AddTaskController = ({ onClose }: AddBoardControllerType) => {
   // const { addTask, boards, currentBoard } = useDashboardStore();
-  const { addTask } = useDashboardStore();
+  const { addTask, topics } = useDashboardStore();
 
   const initialValues: ValuesType = {
     title: "",
@@ -53,7 +53,7 @@ export const AddTaskController = ({ onClose }: AddBoardControllerType) => {
     initialValues,
     onSubmit,
     validate,
-    isDisabled: false,
-    taskGroupList: [],
+    isDisabled: topics.length === 0,
+    topics,
   };
 };

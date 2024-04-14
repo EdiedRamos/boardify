@@ -13,7 +13,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  // Select,
+  Select,
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -27,9 +27,10 @@ import { AddTaskController } from "./AddTaskController";
 
 export const AddTask = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { initialValues, onSubmit, validate, isDisabled } = AddTaskController({
-    onClose,
-  });
+  const { initialValues, onSubmit, validate, isDisabled, topics } =
+    AddTaskController({
+      onClose,
+    });
 
   const initialRef = useRef(null);
 
@@ -117,20 +118,19 @@ export const AddTask = (): JSX.Element => {
                   {/* STATUS */}
                   <FormControl isRequired isInvalid={!!props.errors.status}>
                     <FormLabel>Status</FormLabel>
-                    {/* <Field
+                    <Field
                       as={Select}
                       name="status"
                       placeholder="Select the status"
                     >
-                      {taskGroupList?.map(({ id, status }) => (
+                      {topics.map(({ id, name }) => (
                         <option key={id} value={id}>
-                          {status.length > 10
-                            ? status.substring(0, 10).concat("...")
-                            : status}{" "}
-                          {id}
+                          {name
+                            .substring(0, 30)
+                            .concat(name.length > 30 ? "..." : "")}
                         </option>
                       ))}
-                    </Field> */}
+                    </Field>
                     <FormErrorMessage>{props.errors.status}</FormErrorMessage>
                   </FormControl>
                 </ModalBody>
