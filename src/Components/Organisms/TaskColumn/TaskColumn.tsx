@@ -1,13 +1,17 @@
 import { Stack, Tag } from "@chakra-ui/react";
 import { TaskPreview } from "@/Components/Molecules";
 
-import type { TaskGroupType } from "@/Types";
+import { TaskColumnController } from "./TaskColumnController";
 
-interface TaskColumnI extends TaskGroupType {
+import type { TopicType } from "@/Types";
+
+type TaskColumnType = TopicType & {
   index: number;
-}
+};
 
-export const TaskColumn = (props: TaskColumnI): JSX.Element => {
+export const TaskColumn = (props: TaskColumnType): JSX.Element => {
+  const { tasks } = TaskColumnController();
+
   return (
     <Stack w="sm">
       <Tag
@@ -20,11 +24,11 @@ export const TaskColumn = (props: TaskColumnI): JSX.Element => {
           ]
         }
       >
-        {props.status} ({props.taskList?.length})
+        {props.name} ({tasks?.length})
       </Tag>
       <Stack overflowX="hidden" overflowY="auto">
-        {props.taskList.map(({ title, description }) => (
-          <TaskPreview key={title} title={title} text={description} />
+        {tasks.map(({ id, title, subtitle }) => (
+          <TaskPreview key={id} title={title} text={subtitle ?? ""} />
         ))}
       </Stack>
     </Stack>

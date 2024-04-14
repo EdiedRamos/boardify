@@ -1,16 +1,15 @@
 import { Box } from "@chakra-ui/react";
 
-import { SessionMiddleware } from "@/Components/Middlewares";
 import { EmptySection } from "@/Components/Molecules";
-import { AddTaskGroup, Landing, TaskColumn } from "@/Components/Organisms";
-import { useDashboardStore } from "@/Store";
+import { AddTopic, TaskColumn } from "@/Components/Organisms";
+
+import { BoardController } from "./BoardController";
 
 export const Board = (): JSX.Element => {
-  // const { boards, currentBoard } = useDashboardStore();
-  const { currentBoard } = useDashboardStore();
+  const { currentBoard, topics } = BoardController();
 
   return (
-    <SessionMiddleware fallback={<Landing />}>
+    <>
       {currentBoard === null || currentBoard === undefined ? (
         <EmptySection />
       ) : (
@@ -22,14 +21,12 @@ export const Board = (): JSX.Element => {
           gap={5}
           p="4"
         >
-          {/* {boards
-            .find((board) => board.id === currentBoard)
-            ?.taskGroupList.map((board, index) => (
-              <TaskColumn {...{ ...board, index }} />
-            ))} */}
-          <AddTaskGroup />
+          {topics.map((topic, index) => (
+            <TaskColumn {...{ ...topic, index }} />
+          ))}
+          <AddTopic />
         </Box>
       )}
-    </SessionMiddleware>
+    </>
   );
 };

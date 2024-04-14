@@ -2,13 +2,16 @@ import { useDashboardStore } from "@/Store";
 import { useEffect } from "react";
 
 export const BoardController = () => {
-  const { setBoards, boards } = useDashboardStore();
+  const { setBoards, currentBoard, topics } = useDashboardStore();
 
   useEffect(() => {
     setBoards();
   }, [setBoards]);
 
+  useEffect(() => {}, [currentBoard]);
+
   return {
-    boards,
+    currentBoard,
+    topics,
   };
 };

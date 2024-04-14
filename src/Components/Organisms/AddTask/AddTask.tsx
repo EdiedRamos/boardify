@@ -13,7 +13,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
+  // Select,
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -21,16 +21,15 @@ import { Field, FieldArray, Form, Formik } from "formik";
 import { useRef } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 
-import { SessionMiddleware } from "@/Components/Middlewares";
+import { SessionMiddleware } from "@/Components/Atoms";
 
 import { AddTaskController } from "./AddTaskController";
 
 export const AddTask = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { initialValues, onSubmit, validate, isDisabled, taskGroupList } =
-    AddTaskController({
-      onClose,
-    });
+  const { initialValues, onSubmit, validate, isDisabled } = AddTaskController({
+    onClose,
+  });
 
   const initialRef = useRef(null);
 

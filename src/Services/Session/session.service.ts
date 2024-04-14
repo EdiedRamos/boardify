@@ -32,7 +32,7 @@ export const SessionService = {
         API_BASE_URL.concat("/users/"),
         signUpData
       );
-      return response.status === 200;
+      return response.status === 201;
     } catch {
       return false;
     }

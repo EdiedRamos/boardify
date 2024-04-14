@@ -13,7 +13,7 @@ import { SlOptionsVertical } from "react-icons/sl";
 
 import { DeleteBoard, UpdateBoard } from "..";
 import { useDashboardStore } from "@/Store";
-import { SessionMiddleware } from "@/Components/Middlewares";
+import { SessionMiddleware } from "@/Components/Atoms";
 
 export const OptionsMenu = (): JSX.Element => {
   const { currentBoard } = useDashboardStore();

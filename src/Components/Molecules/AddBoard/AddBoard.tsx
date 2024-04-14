@@ -1,5 +1,5 @@
 import { HiddenBlock } from "@/Components/Atoms";
-import { SessionMiddleware } from "@/Components/Middlewares";
+import { SessionMiddleware } from "@/Components/Atoms";
 import { NavItem } from "@/Components/Molecules";
 import { BoardForm } from "@/Components/Organisms";
 import { IoIosCreate } from "react-icons/io";

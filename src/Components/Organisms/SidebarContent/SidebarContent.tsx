@@ -15,9 +15,9 @@ import { NavItem } from "@/Components/Molecules";
 
 import { useDashboardStore } from "@/Store";
 import { AddBoard } from "@/Components/Molecules";
-import { User } from "@/Components/Organisms";
+import { UserMenu } from "@/Components/Organisms";
 import { ColorModeToggle } from "@/Components/Atoms";
-import { useEffect } from "react";
+import { SessionMiddleware } from "@/Components/Atoms";
 
 interface SidebarProps extends BoxProps {
   onClose: () => void;
@@ -27,12 +27,7 @@ export const SidebarContent = ({
   onClose,
   ...rest
 }: SidebarProps): JSX.Element => {
-  const { boards, setBoards, setCurrentBoard, currentBoard } =
-    useDashboardStore();
-
-  useEffect(() => {
-    setBoards();
-  }, [setBoards]);
+  const { boards, setCurrentBoard, currentBoard } = useDashboardStore();
 
   return (
     <Box
@@ -51,7 +46,7 @@ export const SidebarContent = ({
           Boardify
         </Text>
         <Flex gap="20px">
-          <User />
+          <UserMenu />
           <CloseButton
             display={{ base: "flex", md: "none" }}
             onClick={onClose}
@@ -74,7 +69,9 @@ export const SidebarContent = ({
         ))}
       </Stack>
       <Stack>
-        <AddBoard onFinish={() => onClose()} />
+        <SessionMiddleware fallback={<></>}>
+          <AddBoard onFinish={() => onClose()} />
+        </SessionMiddleware>
       </Stack>
       <Center mt={3}>
         <ColorModeToggle />

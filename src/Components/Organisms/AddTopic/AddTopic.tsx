@@ -21,11 +21,11 @@ import {
 } from "@chakra-ui/react";
 
 import { Field, Form, Formik } from "formik";
-import { AddTaskGroupController } from "./AddTaskGroupController";
+import { AddTopicController } from "./AddTopicController";
 
-export const AddTaskGroup = (): JSX.Element => {
+export const AddTopic = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { initialValues, onSubmit, validate } = AddTaskGroupController({
+  const { initialValues, onSubmit, validate } = AddTopicController({
     onClose,
   });
 
@@ -63,15 +63,15 @@ export const AddTaskGroup = (): JSX.Element => {
             {(props) => (
               <Form>
                 <ModalBody pb={6}>
-                  <FormControl isRequired isInvalid={!!props.errors.status}>
+                  <FormControl isRequired isInvalid={!!props.errors.name}>
                     <FormLabel>Name</FormLabel>
                     <Input
                       as={Field}
                       ref={initialRef}
                       placeholder="Column Name"
-                      name="status"
+                      name="name"
                     />
-                    <FormErrorMessage>{props.errors.status}</FormErrorMessage>
+                    <FormErrorMessage>{props.errors.name}</FormErrorMessage>
                   </FormControl>
                 </ModalBody>
 

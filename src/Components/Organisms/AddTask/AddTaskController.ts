@@ -53,7 +53,7 @@ export const AddTaskController = ({ onClose }: AddBoardControllerType) => {
     initialValues,
     onSubmit,
     validate,
-    isDisabled: true,
+    isDisabled: false,
     taskGroupList: [],
   };
 };

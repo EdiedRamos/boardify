@@ -22,14 +22,16 @@ export const SignInController = () => {
 
   const onSubmit = (values: LoginDataType): void => {
     setIsLoading(true);
-    login(values).then((status) => {
-      if (status) {
-        toast.fire(TOAST_LOGIN.SUCCESS);
-      } else {
+    login(values)
+      .then((status) => {
+        if (status) {
+          toast.fire(TOAST_LOGIN.SUCCESS);
+        }
+      })
+      .catch(() => {
         setIsLoading(false);
         toast.fire(TOAST_LOGIN.FAILURE);
-      }
-    });
+      });
   };
 
   const validate = (values: LoginDataType): ValidateType => {

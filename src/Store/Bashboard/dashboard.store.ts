@@ -1,4 +1,4 @@
-import type { BoardType, TaskGroupBaseType } from "@/Types";
+import type { BoardType, TaskGroupBaseType, TopicType } from "@/Types";
 
 import { create } from "zustand";
 
@@ -7,18 +7,23 @@ import { BoardService } from "@/Services";
 
 export interface DashboardStoreI {
   boards: BoardType[];
-  currentBoard: BoardType | null | undefined;
   setBoards: () => void;
-  setCurrentBoard: (board: BoardType) => void;
   addBoard: (board: Omit<BoardType, "id">) => void;
   updateBoard: (board: Omit<BoardType, "id">) => void;
   deleteBoard: () => void;
+  currentBoard: BoardType | null | undefined;
+  setCurrentBoard: (board: BoardType) => void;
+  topics: TopicType[];
+  setTopics: () => void;
+  addTopic: (topic: Omit<TopicType, "id">) => void;
   addTaskGroup: (taskGroup: Omit<TaskGroupBaseType, "id">) => void;
-  addTask: (task: ValuesType) => void;
+  addTask: (task: Omit<ValuesType, "id">) => void;
+  clearDashboard: () => void;
 }
 
 export const useDashboardStore = create<DashboardStoreI>()((set) => ({
   boards: [],
+  topics: [],
   currentBoard: null,
   async setBoards() {
     const boards = await BoardService.getAllBoards();
@@ -59,10 +64,25 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
       currentBoard: newCurrentBoard,
     }));
   },
+  async setTopics() {},
+  async addTopic(topic) {
+    const newTopic: TopicType = {
+      id: crypto.randomUUID(),
+      name: topic.name,
+    };
+    set((store) => ({ topics: [...store.topics, newTopic] }));
+  },
   addTaskGroup(taskGroup) {
     console.log(taskGroup);
   },
   addTask(task) {
     console.log(task);
+  },
+  clearDashboard() {
+    set(() => ({
+      boards: [],
+      topics: [],
+      currentBoard: null,
+    }));
   },
 }));

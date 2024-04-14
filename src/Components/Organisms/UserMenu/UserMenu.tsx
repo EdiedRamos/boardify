@@ -1,12 +1,19 @@
 import { SignIn, SignUp } from "@/Components/Molecules";
 import { EntryDecoded } from "@/Services";
+import { useDashboardStore } from "@/Store";
 import { useSessionStore } from "@/Store/Session/session.store";
 import { Menu, MenuButton, Avatar, MenuList, MenuItem } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-export const User = (): JSX.Element => {
+export const UserMenu = (): JSX.Element => {
   const { isLogged, logout } = useSessionStore();
+  const { clearDashboard } = useDashboardStore();
   const [username, setUsername] = useState<string>("");
+
+  const handleLogout = () => {
+    logout();
+    clearDashboard();
+  };
 
   useEffect(() => {
     setUsername(EntryDecoded.SESSION.getSub());
@@ -20,7 +27,7 @@ export const User = (): JSX.Element => {
       <MenuList w={160} textAlign={"center"}>
         {isLogged ? (
           <>
-            <MenuItem onClick={logout}>Logout</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </>
         ) : (
           <>

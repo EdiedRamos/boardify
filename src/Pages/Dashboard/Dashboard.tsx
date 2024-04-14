@@ -6,8 +6,9 @@ import {
 } from "@chakra-ui/react";
 
 import { Navbar } from "@/Components/Layouts";
-import { Board, SidebarContent } from "@/Components/Organisms";
+import { Board, Landing, SidebarContent } from "@/Components/Organisms";
 import { useDashboard } from "./useDashboard";
+import { SessionMiddleware } from "@/Components/Atoms";
 
 export const Dashboard = (): JSX.Element => {
   const { isOpen, onOpen, onClose, isMobile } = useDashboard();
@@ -32,7 +33,9 @@ export const Dashboard = (): JSX.Element => {
       </Drawer>
       <Box ml={{ base: 0, md: 60 }}>
         <Navbar onOpen={onOpen} />
-        <Board />
+        <SessionMiddleware fallback={<Landing />}>
+          <Board />
+        </SessionMiddleware>
       </Box>
     </Box>
   );
