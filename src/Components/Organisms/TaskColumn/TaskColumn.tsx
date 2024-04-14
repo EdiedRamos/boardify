@@ -1,19 +1,16 @@
-import { Stack, Tag } from "@chakra-ui/react";
 import { TaskPreview } from "@/Components/Molecules";
+import { Stack, Tag } from "@chakra-ui/react";
 
-import { TaskColumnController } from "./TaskColumnController";
-
-import type { TopicType } from "@/Types";
-
-type TaskColumnType = TopicType & {
-  index: number;
-};
+import {
+  TaskColumnController,
+  type TaskColumnType,
+} from "./TaskColumnController";
 
 export const TaskColumn = (props: TaskColumnType): JSX.Element => {
-  const { tasks } = TaskColumnController();
+  const { tasks, ref, sentry } = TaskColumnController(props);
 
   return (
-    <Stack w="sm">
+    <Stack w="sm" ref={ref}>
       <Tag
         w="sm"
         p={2}
@@ -23,6 +20,7 @@ export const TaskColumn = (props: TaskColumnType): JSX.Element => {
             props.index % 5
           ]
         }
+        border={sentry?.isIntersecting ? "2px solid red" : ""}
       >
         {props.name} ({tasks?.length})
       </Tag>
