@@ -12,7 +12,7 @@ export const Board = (): JSX.Element => {
 
   return (
     <>
-      {currentBoard === null || currentBoard === undefined ? (
+      {!currentBoard ? (
         <EmptySection />
       ) : (
         <Box
