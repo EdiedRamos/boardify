@@ -32,7 +32,10 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
     }));
   },
   setCurrentBoard(board) {
-    set(() => {
+    set((store) => {
+      // * Its the same board
+      if (!store.currentBoard || store.currentBoard.id === board.id)
+        return store;
       return {
         currentBoard: board,
         topics: [],
