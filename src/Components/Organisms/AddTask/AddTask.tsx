@@ -17,7 +17,6 @@ import {
   Stack,
   Text,
   Textarea,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { Field, FieldArray, Form, Formik } from "formik";
 import { useRef } from "react";
@@ -27,18 +26,31 @@ import { SessionMiddleware } from "@/Components/Atoms";
 
 import { AddTaskController } from "./AddTaskController";
 
-export const AddTask = (): JSX.Element => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { initialValues, onSubmit, validate, isDisabled, topics } =
-    AddTaskController({
-      onClose,
-    });
+type PropsType = {
+  topicId: string;
+};
+
+export const AddTask = ({ topicId }: PropsType): JSX.Element => {
+  const {
+    initialValues,
+    onSubmit,
+    validate,
+    isDisabled,
+    topics,
+    isOpen,
+    handleOpen,
+    onClose,
+  } = AddTaskController();
 
   const initialRef = useRef(null);
 
   return (
     <SessionMiddleware fallback={<></>}>
-      <Button colorScheme="messenger" onClick={onOpen} isDisabled={isDisabled}>
+      <Button
+        colorScheme="messenger"
+        onClick={() => handleOpen(topicId)}
+        isDisabled={isDisabled}
+      >
         + New Task
       </Button>
 

@@ -14,8 +14,6 @@ export const TaskColumnController = (props: TaskColumnType) => {
   const wasWatched = useRef(false);
   useEffect(() => {
     if (sentry?.isIntersecting && !wasWatched.current) {
-      // console.log(`${props.name} IM HERE`);
-      console.log(`MAKING REQUEST: ${props.name}`);
       TaskService.getAllTasks(props.id).then((response) => {
         setTasks(response);
       });

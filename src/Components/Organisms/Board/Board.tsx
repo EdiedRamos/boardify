@@ -5,6 +5,7 @@ import { AddTopic, TaskColumn } from "@/Components/Organisms";
 
 import { CircularLoader, RenderWrapper } from "@/Components/Atoms";
 import { BoardController } from "./BoardController";
+import { BoardProvider } from "@/Providers";
 
 export const Board = (): JSX.Element => {
   const { currentBoard, topics, isLoadingTopics } = BoardController();
@@ -24,10 +25,12 @@ export const Board = (): JSX.Element => {
         >
           <CircularLoader show={isLoadingTopics} />
           <RenderWrapper render={!isLoadingTopics}>
-            {topics.map((topic, index) => (
-              <TaskColumn key={topic.id} {...{ ...topic, index }} />
-            ))}
-            <AddTopic />
+            <BoardProvider>
+              {topics.map((topic, index) => (
+                <TaskColumn key={topic.id} {...{ ...topic, index }} />
+              ))}
+              <AddTopic />
+            </BoardProvider>
           </RenderWrapper>
         </Box>
       )}

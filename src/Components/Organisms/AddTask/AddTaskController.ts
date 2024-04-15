@@ -1,17 +1,13 @@
 import { useDashboardStore } from "@/Store";
 import type { TaskCreationType } from "@/Types";
+import { useDisclosure } from "@chakra-ui/react";
+import { validate } from "./validators";
+import { useBoard } from "@/Core/Hooks/useBoard";
 
-type ValidateType = {
-  [K in keyof TaskCreationType]?: string;
-};
-
-type AddBoardControllerType = {
-  onClose: () => void;
-};
-
-export const AddTaskController = ({ onClose }: AddBoardControllerType) => {
-  // const { addTask, boards, currentBoard } = useDashboardStore();
+export const AddTaskController = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { addTask, topics } = useDashboardStore();
+  const board = useBoard();
 
   const initialValues: TaskCreationType = {
     name: "",
@@ -21,38 +17,17 @@ export const AddTaskController = ({ onClose }: AddBoardControllerType) => {
   };
 
   const onSubmit = (values: TaskCreationType) => {
+    if (!board?.currentTopic) {
+      return;
+    }
+    values.topicId = board.currentTopic;
     addTask(values);
     onClose();
   };
 
-  const validate = (values: TaskCreationType) => {
-    const errors: ValidateType = {};
-
-    const isEmptyName = values.name.trim().length === 0;
-    if (isEmptyName) {
-      errors.name = "Name is required";
-    }
-
-    const isDescriptionEmpty = values.description.trim().length === 0;
-    if (isDescriptionEmpty) {
-      errors.description = "Description is required";
-    }
-
-    const isEmptyTopic = +values.topicId === 0;
-    if (isEmptyTopic) {
-      errors.topicId = "Status is required";
-    }
-
-    const areEmptyTaskItems = values.taskItems.filter((task) => {
-      if (typeof task !== "string") return false;
-      return task.trim().length === 0;
-    });
-    if (areEmptyTaskItems.length > 0) {
-      console.log("must appear an error");
-      errors.taskItems = "There are empty fields";
-    }
-
-    return errors;
+  const handleOpen = (topicId: string) => {
+    board?.handleTopic(topicId);
+    onOpen();
   };
 
   return {
@@ -61,5 +36,8 @@ export const AddTaskController = ({ onClose }: AddBoardControllerType) => {
     validate,
     isDisabled: topics.length === 0,
     topics,
+    isOpen,
+    onClose,
+    handleOpen,
   };
 };
