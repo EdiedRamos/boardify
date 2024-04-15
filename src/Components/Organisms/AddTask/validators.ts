@@ -17,11 +17,6 @@ export const validate = (values: TaskCreationType) => {
     errors.description = "Description is required";
   }
 
-  const isEmptyTopic = +values.topicId === 0;
-  if (isEmptyTopic) {
-    errors.topicId = "Status is required";
-  }
-
   const areEmptyTaskItems = values.taskItems.filter((task) => {
     if (typeof task !== "string") return false;
     return task.trim().length === 0;

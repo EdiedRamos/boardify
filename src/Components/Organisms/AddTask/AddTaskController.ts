@@ -21,6 +21,9 @@ export const AddTaskController = () => {
       return;
     }
     values.topicId = board.currentTopic;
+    // TODO: Remove this when its not required
+    // @ts-expect-error This will be removed soon, so its better this than modify the current types
+    values.statusId = 1;
     addTask(values);
     onClose();
   };
@@ -35,7 +38,6 @@ export const AddTaskController = () => {
     onSubmit,
     validate,
     isDisabled: topics.length === 0,
-    topics,
     isOpen,
     onClose,
     handleOpen,

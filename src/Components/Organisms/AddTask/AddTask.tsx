@@ -13,7 +13,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
   Stack,
   Text,
   Textarea,
@@ -36,7 +35,6 @@ export const AddTask = ({ topicId }: PropsType): JSX.Element => {
     onSubmit,
     validate,
     isDisabled,
-    topics,
     isOpen,
     handleOpen,
     onClose,
@@ -142,24 +140,6 @@ export const AddTask = ({ topicId }: PropsType): JSX.Element => {
                       </FormControl>
                     )}
                   </FieldArray>
-                  {/* STATUS */}
-                  <FormControl isRequired isInvalid={!!props.errors.topicId}>
-                    <FormLabel>Status</FormLabel>
-                    <Field
-                      as={Select}
-                      name="topicId"
-                      placeholder="Select the status"
-                    >
-                      {topics.map(({ id, name }) => (
-                        <option key={id} value={id}>
-                          {name
-                            .substring(0, 30)
-                            .concat(name.length > 30 ? "..." : "")}
-                        </option>
-                      ))}
-                    </Field>
-                    <FormErrorMessage>{props.errors.topicId}</FormErrorMessage>
-                  </FormControl>
                 </ModalBody>
 
                 <ModalFooter>
