@@ -18,7 +18,6 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { Field, FieldArray, Form, Formik } from "formik";
-import { useRef } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 
 import { SessionMiddleware } from "@/Components/Atoms";
@@ -40,8 +39,6 @@ export const AddTask = ({ topicId }: PropsType): JSX.Element => {
     onClose,
   } = AddTaskController();
 
-  const initialRef = useRef(null);
-
   return (
     <SessionMiddleware fallback={<></>}>
       <Button
@@ -52,7 +49,7 @@ export const AddTask = ({ topicId }: PropsType): JSX.Element => {
         + New Task
       </Button>
 
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add New Task</ModalHeader>
@@ -70,7 +67,6 @@ export const AddTask = ({ topicId }: PropsType): JSX.Element => {
                     <FormLabel>Title</FormLabel>
                     <Input
                       as={Field}
-                      ref={initialRef}
                       placeholder="e.g Take coffee break"
                       name="name"
                     />
