@@ -1,12 +1,15 @@
-import { useDashboardStore } from "@/Store";
 import type { TaskCreationType } from "@/Types";
+
 import { useDisclosure } from "@chakra-ui/react";
-import { validate } from "./validators";
+
 import { useBoard } from "@/Core/Hooks/useBoard";
+import { TaskService } from "@/Services";
+import { useDashboardStore } from "@/Store";
+import { validate } from "./validators";
 
 export const AddTaskController = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { addTask, topics } = useDashboardStore();
+  const { topics } = useDashboardStore();
   const board = useBoard();
 
   const initialValues: TaskCreationType = {
@@ -24,7 +27,11 @@ export const AddTaskController = () => {
     // TODO: Remove this when its not required
     // @ts-expect-error This will be removed soon, so its better this than modify the current types
     values.statusId = 1;
-    addTask(values);
+    TaskService.createTask(values).then((task) => {
+      if (task) {
+        board.taskEmitter(task);
+      }
+    });
     onClose();
   };
 
