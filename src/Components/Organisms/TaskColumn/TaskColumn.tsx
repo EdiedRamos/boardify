@@ -1,4 +1,4 @@
-import { ColumnOptions, TaskPreview } from "@/Components/Molecules";
+import { TopicOptions, TaskPreview } from "@/Components/Molecules";
 import { Flex, Stack, Tag } from "@chakra-ui/react";
 
 import { AddTask } from "../AddTask/AddTask";
@@ -26,7 +26,7 @@ export const TaskColumn = (props: TaskColumnType): JSX.Element => {
           {props.name} ({tasks?.length})
         </Tag>
         <Flex position={"absolute"} gap={2} right={3}>
-          <ColumnOptions />
+          <TopicOptions />
         </Flex>
       </Flex>
       <AddTask topicId={props.id} />

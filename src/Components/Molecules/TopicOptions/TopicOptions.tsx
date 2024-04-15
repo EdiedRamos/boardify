@@ -3,7 +3,7 @@ import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
 import { MdDeleteOutline, MdEdit } from "react-icons/md";
 
-export const ColumnOptions = () => {
+export const TopicOptions = () => {
   return (
     <Menu size={"md"} isLazy>
       <MenuButton aria-label="column options">
