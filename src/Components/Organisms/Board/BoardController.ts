@@ -11,11 +11,12 @@ export const BoardController = () => {
   }, []);
 
   useEffect(() => {
+    if (!currentBoard || !currentBoard.isNew) {
+      return;
+    }
     setTopics();
     // eslint-disable-next-line
   }, [currentBoard]);
-
-  useEffect(() => {}, [currentBoard]);
 
   return {
     currentBoard,

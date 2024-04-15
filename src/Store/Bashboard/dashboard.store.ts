@@ -4,13 +4,17 @@ import { create } from "zustand";
 
 import { BoardService, TopicService } from "@/Services";
 
+type BoardState = BoardType & {
+  isNew: boolean;
+};
+
 export interface DashboardStoreI {
   boards: BoardType[];
   setBoards: () => void;
   addBoard: (board: Omit<BoardType, "id">) => void;
   updateBoard: (board: BoardType) => void;
   deleteBoard: () => void;
-  currentBoard: BoardType | null | undefined;
+  currentBoard: BoardState | null | undefined;
   setCurrentBoard: (board: BoardType) => void;
   topics: TopicType[];
   isLoadingTopics: boolean;
@@ -28,7 +32,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
     const boards = await BoardService.getAllBoards();
     set(() => ({
       boards: boards,
-      currentBoard: boards[0],
+      currentBoard: { ...boards[0], isNew: true },
     }));
   },
   setCurrentBoard(board) {
@@ -37,7 +41,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
       if (!store.currentBoard || store.currentBoard.id === board.id)
         return store;
       return {
-        currentBoard: board,
+        currentBoard: { ...board, isNew: true },
         topics: [],
       };
     });
@@ -47,7 +51,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
     if (newBoard === null) return;
     set((store) => ({
       boards: [...store.boards, newBoard],
-      currentBoard: newBoard,
+      currentBoard: { ...newBoard, isNew: true },
     }));
   },
   async updateBoard(board) {
@@ -56,6 +60,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
       boards: store.boards.map((board) =>
         board.id === updated.id ? updated : board
       ),
+      currentBoard: { ...updated, isNew: false },
     }));
   },
   async deleteBoard() {
@@ -69,7 +74,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
     const newCurrentBoard = newBoardsList[0];
     set(() => ({
       boards: newBoardsList,
-      currentBoard: newCurrentBoard,
+      currentBoard: { ...newCurrentBoard, isNew: true },
     }));
   },
   async setTopics() {
