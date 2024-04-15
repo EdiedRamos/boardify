@@ -6,3 +6,4 @@ export { Landing } from "./Landing/Landing";
 export { SidebarContent } from "./SidebarContent/SidebarContent";
 export { TaskColumn } from "./TaskColumn/TaskColumn";
 export { UserMenu } from "./UserMenu/UserMenu";
+export { TopicForm } from "./TopicForm/TopicForm";

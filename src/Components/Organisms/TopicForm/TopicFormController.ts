@@ -7,7 +7,9 @@ type AddTaskGroupControllerType = {
   onClose: () => void;
 };
 
-export const AddTopicController = ({ onClose }: AddTaskGroupControllerType) => {
+export const TopicFormController = ({
+  onClose,
+}: AddTaskGroupControllerType) => {
   const { addTopic } = useDashboardStore();
 
   const initialValues: ValuesType = {
