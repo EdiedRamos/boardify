@@ -1,14 +1,15 @@
 import {
   Box,
   Drawer,
-  useColorModeValue,
   DrawerContent,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
+import { SessionMiddleware } from "@/Components/Atoms";
 import { Navbar } from "@/Components/Layouts";
 import { Board, Landing, SidebarContent } from "@/Components/Organisms";
+import { BoardProvider } from "@/Providers";
 import { useDashboard } from "./useDashboard";
-import { SessionMiddleware } from "@/Components/Atoms";
 
 export const Dashboard = (): JSX.Element => {
   const { isOpen, onOpen, onClose, isMobile } = useDashboard();
@@ -34,7 +35,9 @@ export const Dashboard = (): JSX.Element => {
       <Box ml={{ base: 0, md: 60 }}>
         <Navbar onOpen={onOpen} />
         <SessionMiddleware fallback={<Landing />}>
-          <Board />
+          <BoardProvider>
+            <Board />
+          </BoardProvider>
         </SessionMiddleware>
       </Box>
     </Box>
