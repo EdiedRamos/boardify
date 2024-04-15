@@ -23,7 +23,7 @@ export const Board = (): JSX.Element => {
           p="4"
         >
           <CircularLoader show={isLoadingTopics} />
-          <RenderWrapper render={true || !isLoadingTopics}>
+          <RenderWrapper render={!isLoadingTopics}>
             {topics.map((topic, index) => (
               <TaskColumn key={topic.id} {...{ ...topic, index }} />
             ))}

@@ -11,7 +11,6 @@ import {
 import { FiMenu } from "react-icons/fi";
 
 import { useDashboardStore } from "@/Store";
-import { AddTask } from "@/Components/Organisms";
 
 interface NavbarProps extends FlexProps {
   onOpen: () => void;
@@ -57,9 +56,6 @@ export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
         </Center>
       </Flex>
       <Flex gap={1}>
-        <Box>
-          <AddTask />
-        </Box>
         <Box>
           <OptionsMenu />
         </Box>

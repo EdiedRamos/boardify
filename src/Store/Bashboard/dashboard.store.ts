@@ -1,9 +1,8 @@
-import type { BoardType, TaskGroupBaseType, TopicType } from "@/Types";
+import type { BoardType, TopicType, TaskCreationType } from "@/Types";
 
 import { create } from "zustand";
 
-import type { ValuesType } from "@/Components/Organisms/AddTask/AddTaskController";
-import { BoardService, TopicService } from "@/Services";
+import { BoardService, TaskService, TopicService } from "@/Services";
 
 export interface DashboardStoreI {
   boards: BoardType[];
@@ -17,8 +16,7 @@ export interface DashboardStoreI {
   isLoadingTopics: boolean;
   setTopics: () => void;
   addTopic: (topic: Omit<TopicType, "id">) => void;
-  addTaskGroup: (taskGroup: Omit<TaskGroupBaseType, "id">) => void;
-  addTask: (task: Omit<ValuesType, "id">) => void;
+  addTask: (task: TaskCreationType) => void;
   clearDashboard: () => void;
 }
 
@@ -94,11 +92,8 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
     if (newTopic === null) return;
     set((store) => ({ topics: [...store.topics, newTopic] }));
   },
-  addTaskGroup(taskGroup) {
-    console.log(taskGroup);
-  },
   addTask(task) {
-    console.log(task);
+    TaskService.createTask(task);
   },
   clearDashboard() {
     set(() => ({

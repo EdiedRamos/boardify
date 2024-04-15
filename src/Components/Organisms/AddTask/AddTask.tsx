@@ -14,6 +14,8 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
+  Stack,
+  Text,
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -54,15 +56,15 @@ export const AddTask = (): JSX.Element => {
               <Form>
                 <ModalBody pb={6}>
                   {/* TITLE */}
-                  <FormControl isRequired isInvalid={!!props.errors.title}>
+                  <FormControl isRequired isInvalid={!!props.errors.name}>
                     <FormLabel>Title</FormLabel>
                     <Input
                       as={Field}
                       ref={initialRef}
                       placeholder="e.g Take coffee break"
-                      name="title"
+                      name="name"
                     />
-                    <FormErrorMessage>{props.errors.title}</FormErrorMessage>
+                    <FormErrorMessage>{props.errors.name}</FormErrorMessage>
                   </FormControl>
                   {/* DESCRIPTION */}
                   <FormControl
@@ -80,35 +82,48 @@ export const AddTask = (): JSX.Element => {
                     </FormErrorMessage>
                   </FormControl>
                   {/* SUBTASKS */}
-                  <FieldArray name="subtaskList">
+                  <FieldArray name="taskItems">
                     {({ push, remove }) => (
-                      <FormControl isInvalid={!!props.errors.subtaskList}>
+                      <FormControl>
                         <FormLabel>Subtasks</FormLabel>
-                        {props.values.subtaskList.map((_, index) => (
-                          <Flex align="center" gap={2} key={index}>
-                            <Input
-                              as={Field}
-                              placeholder="e.g It's always good to take a break."
-                              name={`subtaskList.${index}.title`}
-                            />
-                            <Icon
-                              fontSize={20}
-                              transition="500ms"
-                              _hover={{
-                                opacity: "80%",
-                                transform: "scale(1.2)",
-                                cursor: "pointer",
-                              }}
-                              as={IoIosCloseCircle}
-                              onClick={() => remove(index)}
-                            />
-                          </Flex>
-                        ))}
+                        <Stack
+                          border={
+                            props.errors.taskItems ? "2px solid #eb6e6e" : ""
+                          }
+                          p={props.errors.taskItems ? 3 : 0}
+                          borderRadius={8}
+                        >
+                          {props.values.taskItems.map((_, index) => (
+                            <Flex align="center" gap={2} key={index}>
+                              <Input
+                                as={Field}
+                                placeholder="e.g It's always good to take a break."
+                                name={`taskItems.${index}`}
+                              />
+                              <Icon
+                                fontSize={20}
+                                transition="500ms"
+                                _hover={{
+                                  opacity: "80%",
+                                  transform: "scale(1.2)",
+                                  cursor: "pointer",
+                                }}
+                                as={IoIosCloseCircle}
+                                onClick={() => remove(index)}
+                              />
+                            </Flex>
+                          ))}
+                        </Stack>
+                        {!!props.errors.taskItems && (
+                          <Text color="red.500" fontSize="sm">
+                            {props.errors.taskItems}
+                          </Text>
+                        )}
                         <Button
                           w="full"
                           my={3}
                           colorScheme="gray"
-                          onClick={() => push({ title: "" })}
+                          onClick={() => push("")}
                         >
                           + Add New Subtask
                         </Button>
@@ -116,11 +131,11 @@ export const AddTask = (): JSX.Element => {
                     )}
                   </FieldArray>
                   {/* STATUS */}
-                  <FormControl isRequired isInvalid={!!props.errors.status}>
+                  <FormControl isRequired isInvalid={!!props.errors.topicId}>
                     <FormLabel>Status</FormLabel>
                     <Field
                       as={Select}
-                      name="status"
+                      name="topicId"
                       placeholder="Select the status"
                     >
                       {topics.map(({ id, name }) => (
@@ -131,7 +146,7 @@ export const AddTask = (): JSX.Element => {
                         </option>
                       ))}
                     </Field>
-                    <FormErrorMessage>{props.errors.status}</FormErrorMessage>
+                    <FormErrorMessage>{props.errors.topicId}</FormErrorMessage>
                   </FormControl>
                 </ModalBody>
 

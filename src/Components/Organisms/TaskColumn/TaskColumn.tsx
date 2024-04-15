@@ -5,9 +5,10 @@ import {
   TaskColumnController,
   type TaskColumnType,
 } from "./TaskColumnController";
+import { AddTask } from "../AddTask/AddTask";
 
 export const TaskColumn = (props: TaskColumnType): JSX.Element => {
-  const { tasks, ref, sentry } = TaskColumnController(props);
+  const { tasks, ref } = TaskColumnController(props);
 
   return (
     <Stack w="sm" ref={ref}>
@@ -20,13 +21,13 @@ export const TaskColumn = (props: TaskColumnType): JSX.Element => {
             props.index % 5
           ]
         }
-        border={sentry?.isIntersecting ? "2px solid red" : ""}
       >
         {props.name} ({tasks?.length})
       </Tag>
+      <AddTask />
       <Stack overflowX="hidden" overflowY="auto">
-        {tasks.map(({ id, title, subtitle }) => (
-          <TaskPreview key={id} title={title} text={subtitle ?? ""} />
+        {tasks.map(({ id, name, description }) => (
+          <TaskPreview key={id} title={name} text={description ?? ""} />
         ))}
       </Stack>
     </Stack>

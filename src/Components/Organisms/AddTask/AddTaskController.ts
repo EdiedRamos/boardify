@@ -1,12 +1,9 @@
 import { useDashboardStore } from "@/Store";
-import type { TaskType } from "@/Types";
+import type { TaskCreationType } from "@/Types";
 
-export type ValuesType = Omit<TaskType, "id" | "subtaskList" | "status"> & {
-  subtaskList: { title: string }[];
-  status: string;
+type ValidateType = {
+  [K in keyof TaskCreationType]?: string;
 };
-
-type ValidateType = Partial<Omit<ValuesType, "status"> & { status: string }>;
 
 type AddBoardControllerType = {
   onClose: () => void;
@@ -16,24 +13,24 @@ export const AddTaskController = ({ onClose }: AddBoardControllerType) => {
   // const { addTask, boards, currentBoard } = useDashboardStore();
   const { addTask, topics } = useDashboardStore();
 
-  const initialValues: ValuesType = {
-    title: "",
+  const initialValues: TaskCreationType = {
+    name: "",
     description: "",
-    subtaskList: [{ title: "" }],
-    status: "",
+    topicId: "",
+    taskItems: [],
   };
 
-  const onSubmit = (values: ValuesType) => {
+  const onSubmit = (values: TaskCreationType) => {
     addTask(values);
     onClose();
   };
 
-  const validate = (values: ValuesType) => {
+  const validate = (values: TaskCreationType) => {
     const errors: ValidateType = {};
 
-    const isTitleEmpty = values.title.trim().length === 0;
-    if (isTitleEmpty) {
-      errors.title = "Name is required";
+    const isEmptyName = values.name.trim().length === 0;
+    if (isEmptyName) {
+      errors.name = "Name is required";
     }
 
     const isDescriptionEmpty = values.description.trim().length === 0;
@@ -41,9 +38,18 @@ export const AddTaskController = ({ onClose }: AddBoardControllerType) => {
       errors.description = "Description is required";
     }
 
-    const isStatusEmpty = +values.status === 0;
-    if (isStatusEmpty) {
-      errors.status = "Status is required";
+    const isEmptyTopic = +values.topicId === 0;
+    if (isEmptyTopic) {
+      errors.topicId = "Status is required";
+    }
+
+    const areEmptyTaskItems = values.taskItems.filter((task) => {
+      if (typeof task !== "string") return false;
+      return task.trim().length === 0;
+    });
+    if (areEmptyTaskItems.length > 0) {
+      console.log("must appear an error");
+      errors.taskItems = "There are empty fields";
     }
 
     return errors;
