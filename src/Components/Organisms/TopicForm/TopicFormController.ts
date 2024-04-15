@@ -5,10 +5,12 @@ type ValuesType = Omit<TopicType, "id">;
 
 type AddTaskGroupControllerType = {
   onClose: () => void;
+  isUpdating: boolean;
 };
 
 export const TopicFormController = ({
   onClose,
+  isUpdating,
 }: AddTaskGroupControllerType) => {
   const { addTopic } = useDashboardStore();
 
@@ -17,7 +19,12 @@ export const TopicFormController = ({
   };
 
   const onSubmit = (values: ValuesType) => {
-    addTopic(values);
+    if (isUpdating) {
+      alert("COMING SOON");
+    } else {
+      addTopic(values);
+    }
+
     onClose();
   };
 

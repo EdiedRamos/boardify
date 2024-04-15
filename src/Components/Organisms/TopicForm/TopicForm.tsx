@@ -16,6 +16,7 @@ import {
 import { Field, Form, Formik } from "formik";
 
 import { TopicFormController } from "./TopicFormController";
+import { getTitle } from "./topicForm.utils";
 
 type ChildrenPropsType = {
   onClick: () => void;
@@ -23,12 +24,17 @@ type ChildrenPropsType = {
 
 type PropsType = {
   children: (props: ChildrenPropsType) => JSX.Element;
+  isUpdating?: boolean;
 };
 
-export const TopicForm = ({ children }: PropsType): JSX.Element => {
+export const TopicForm = ({
+  children,
+  isUpdating = false,
+}: PropsType): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { initialValues, onSubmit, validate } = TopicFormController({
     onClose,
+    isUpdating,
   });
 
   return (
@@ -38,7 +44,7 @@ export const TopicForm = ({ children }: PropsType): JSX.Element => {
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create a New Column</ModalHeader>
+          <ModalHeader>{getTitle(isUpdating)}</ModalHeader>
           <ModalCloseButton />
           <Formik
             initialValues={initialValues}

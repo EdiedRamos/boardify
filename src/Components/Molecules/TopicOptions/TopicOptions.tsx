@@ -11,7 +11,7 @@ export const TopicOptions = () => {
         <BsThreeDots />
       </MenuButton>
       <MenuList>
-        <TopicForm>
+        <TopicForm isUpdating>
           {({ onClick }) => (
             <MenuItem onClick={onClick} icon={<MdEdit fontSize={15} />}>
               Edit
