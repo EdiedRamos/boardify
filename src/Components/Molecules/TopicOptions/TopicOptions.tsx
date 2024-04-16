@@ -6,6 +6,7 @@ import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsThreeDots } from "react-icons/bs";
 import { MdDeleteOutline, MdEdit } from "react-icons/md";
 import { useBoard } from "@/Core/Hooks/useBoard";
+import { useDashboardStore } from "@/Store";
 
 type PropsType = {
   topic: TopicType;
@@ -13,6 +14,11 @@ type PropsType = {
 
 export const TopicOptions = ({ topic }: PropsType) => {
   const board = useBoard();
+  const { deleteTopic } = useDashboardStore();
+
+  const handleDelete = () => {
+    deleteTopic(topic.id);
+  };
 
   return (
     <Menu size={"md"}>
@@ -33,7 +39,12 @@ export const TopicOptions = ({ topic }: PropsType) => {
             </MenuItem>
           )}
         </TopicForm>
-        <MenuItem icon={<MdDeleteOutline fontSize={15} />}>Delete</MenuItem>
+        <MenuItem
+          onClick={handleDelete}
+          icon={<MdDeleteOutline fontSize={15} />}
+        >
+          Delete
+        </MenuItem>
       </MenuList>
     </Menu>
   );

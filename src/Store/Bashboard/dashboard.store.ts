@@ -21,6 +21,7 @@ export interface DashboardStoreI {
   setTopics: () => void;
   addTopic: (topic: Omit<TopicType, "id">) => void;
   updateTopic: (topic: TopicType) => void;
+  deleteTopic: (topicId: string) => void;
   clearDashboard: () => void;
 }
 
@@ -114,6 +115,18 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
       topics: store.topics.map((topic) =>
         topic.id === updated.id ? updated : topic
       ),
+    }));
+  },
+
+  async deleteTopic(topicId) {
+    const response = await TopicService.deleteTopic(topicId);
+    // * Not deleted
+    if (!response) {
+      return;
+    }
+
+    set((store) => ({
+      topics: store.topics.filter((topic) => topic.id !== topicId),
     }));
   },
 

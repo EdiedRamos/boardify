@@ -31,12 +31,9 @@ export const TopicService = {
     }
   },
 
-  async deleteTopic(boardId: string): Promise<boolean> {
+  async deleteTopic(topicId: string): Promise<boolean> {
     try {
-      const response: AxiosResponse<unknown> = await baseAxios
-        .create()
-        .delete<unknown>(`boards/${boardId}/`);
-      console.log({ response });
+      await baseAxios.create().delete<unknown>(`topics/${topicId}/`);
       return true;
     } catch {
       return false;
