@@ -19,12 +19,7 @@ export const TaskColumnController = (props: TaskColumnType) => {
   useEffect(() => {
     if (!board?.newTask || board.currentTopic?.id !== props.id) return;
     const { newTask } = board;
-    const newTaskPreview: TaskPreviewType = {
-      id: newTask.id,
-      name: newTask.name,
-      description: newTask.description,
-    };
-    setTasks((prev) => [...prev, newTaskPreview]);
+    setTasks((prev) => [...prev, newTask]);
     board.taskReceiver();
     // eslint-disable-next-line
   }, [board?.newTask]);
