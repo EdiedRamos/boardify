@@ -29,7 +29,7 @@ export const TaskColumn = (props: TaskColumnType): JSX.Element => {
           <TopicOptions />
         </Flex>
       </Flex>
-      <AddTask topicId={props.id} />
+      <AddTask topic={{ id: props.id, name: props.name }} />
       <Stack overflowX="hidden" overflowY="auto">
         {tasks.map(({ id, name, description }) => (
           <TaskPreview key={id} title={name} text={description ?? ""} />

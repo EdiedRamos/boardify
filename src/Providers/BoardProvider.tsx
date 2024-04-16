@@ -1,18 +1,18 @@
 import { useState } from "react";
 
 import { BoardContext } from "@/Context";
-import { TaskType } from "@/Types";
+import { TaskType, TopicType } from "@/Types";
 
 type PropsType = {
   children: React.ReactNode;
 };
 
 export const BoardProvider = ({ children }: PropsType) => {
-  const [currentTopic, setCurrentTopic] = useState<string>("");
+  const [currentTopic, setCurrentTopic] = useState<TopicType | null>(null);
   const [newTask, setNewTask] = useState<TaskType | null>(null);
 
-  const handleTopic = (topicId: string) => {
-    setCurrentTopic(topicId);
+  const handleTopic = (topic: TopicType) => {
+    setCurrentTopic(topic);
   };
 
   const taskEmitter = (task: TaskType) => {

@@ -1,3 +1,5 @@
+import type { TopicType } from "@/Types";
+
 import {
   Button,
   Flex,
@@ -25,10 +27,10 @@ import { SessionMiddleware } from "@/Components/Atoms";
 import { AddTaskController } from "./AddTaskController";
 
 type PropsType = {
-  topicId: string;
+  topic: TopicType;
 };
 
-export const AddTask = ({ topicId }: PropsType): JSX.Element => {
+export const AddTask = ({ topic }: PropsType): JSX.Element => {
   const {
     initialValues,
     onSubmit,
@@ -43,7 +45,7 @@ export const AddTask = ({ topicId }: PropsType): JSX.Element => {
     <SessionMiddleware fallback={<></>}>
       <Button
         colorScheme="messenger"
-        onClick={() => handleOpen(topicId)}
+        onClick={() => handleOpen(topic)}
         isDisabled={isDisabled}
       >
         + New Task

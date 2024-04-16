@@ -17,7 +17,7 @@ export const TaskColumnController = (props: TaskColumnType) => {
   const wasWatched = useRef(false);
 
   useEffect(() => {
-    if (!board?.newTask || board.currentTopic !== props.id) return;
+    if (!board?.newTask || board.currentTopic?.id !== props.id) return;
     const { newTask } = board;
     const newTaskPreview: TaskPreviewType = {
       id: newTask.id,

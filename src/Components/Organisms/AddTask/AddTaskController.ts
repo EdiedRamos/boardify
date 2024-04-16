@@ -1,4 +1,4 @@
-import type { TaskCreationType } from "@/Types";
+import type { TaskCreationType, TopicType } from "@/Types";
 
 import { useDisclosure } from "@chakra-ui/react";
 
@@ -23,7 +23,7 @@ export const AddTaskController = () => {
     if (!board?.currentTopic) {
       return;
     }
-    values.topicId = board.currentTopic;
+    values.topicId = board.currentTopic.id;
     // TODO: Remove this when its not required
     // @ts-expect-error This will be removed soon, so its better this than modify the current types
     values.statusId = 1;
@@ -35,8 +35,8 @@ export const AddTaskController = () => {
     onClose();
   };
 
-  const handleOpen = (topicId: string) => {
-    board?.handleTopic(topicId);
+  const handleOpen = (topic: TopicType) => {
+    board?.handleTopic(topic);
     onOpen();
   };
 

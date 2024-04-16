@@ -1,10 +1,10 @@
 import { createContext } from "react";
 
-import type { TaskType } from "@/Types";
+import type { TaskType, TopicType } from "@/Types";
 
 type BoardContextType = {
-  currentTopic: string;
-  handleTopic: (topidId: string) => void;
+  currentTopic: TopicType | null;
+  handleTopic: (topic: TopicType) => void;
   newTask: TaskType | null;
   taskEmitter: (task: TaskType) => void;
   taskReceiver: () => void;
