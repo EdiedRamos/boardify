@@ -9,3 +9,4 @@ export { SignUp } from "./SignUp/SignUp";
 export { TaskPreview } from "./TaskPreview/TaskPreview";
 export { TopicOptions } from "./TopicOptions/TopicOptions";
 export { UpdateBoard } from "./UpdateBoard/UpdateBoard";
+export { TaskOptions } from "./TaskOptions/TaskOptions";

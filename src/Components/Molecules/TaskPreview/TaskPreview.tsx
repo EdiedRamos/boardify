@@ -1,6 +1,14 @@
 import type { TaskType } from "@/Types";
 
-import { Card, CardBody, CardHeader, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Card,
+  CardBody,
+  CardHeader,
+  Heading,
+  Text,
+} from "@chakra-ui/react";
+import { TaskOptions } from "../TaskOptions/TaskOptions";
 
 type TaskPreviewProps = {
   task: TaskType;
@@ -12,10 +20,12 @@ export const TaskPreview = ({
   onDelete,
 }: TaskPreviewProps): JSX.Element => {
   return (
-    <Card variant="elevated">
+    <Card variant="elevated" position={"relative"}>
+      <Box position={"absolute"} right={3}>
+        <TaskOptions task={task} onDelete={onDelete} />
+      </Box>
       <CardHeader>
         <Heading size="md">{task.name}</Heading>
-        <button onClick={() => onDelete(task)}>DELETE</button>
       </CardHeader>
       <CardBody>
         <Text>{task.description}</Text>
