@@ -16,9 +16,9 @@ type Composed = JSX.Element | string;
 
 type PropsType = {
   header: Composed;
-  body: Composed;
-  cancelText: string;
-  acceptText: string;
+  body?: Composed;
+  cancelText?: string;
+  acceptText?: string;
   onCancel?: () => void;
   onAccept: () => void;
   children: (props: { onClick: () => void }) => JSX.Element;
@@ -26,9 +26,9 @@ type PropsType = {
 
 export const ConfirmationDialog = ({
   header,
-  body,
-  cancelText,
-  acceptText,
+  body = "Are you sure you want to delete?",
+  cancelText = "Cancel",
+  acceptText = "Delete",
   onCancel,
   onAccept,
   children,

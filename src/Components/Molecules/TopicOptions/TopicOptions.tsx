@@ -7,6 +7,7 @@ import { BsThreeDots } from "react-icons/bs";
 import { MdDeleteOutline, MdEdit } from "react-icons/md";
 import { useBoard } from "@/Core/Hooks/useBoard";
 import { useDashboardStore } from "@/Store";
+import { ConfirmationDialog } from "@/Components/Molecules";
 
 type PropsType = {
   topic: TopicType;
@@ -39,12 +40,16 @@ export const TopicOptions = ({ topic }: PropsType) => {
             </MenuItem>
           )}
         </TopicForm>
-        <MenuItem
-          onClick={handleDelete}
-          icon={<MdDeleteOutline fontSize={15} />}
-        >
-          Delete
-        </MenuItem>
+        <ConfirmationDialog header="Delete Column" onAccept={handleDelete}>
+          {(props) => (
+            <MenuItem
+              onClick={props.onClick}
+              icon={<MdDeleteOutline fontSize={15} />}
+            >
+              Delete
+            </MenuItem>
+          )}
+        </ConfirmationDialog>
       </MenuList>
     </Menu>
   );
