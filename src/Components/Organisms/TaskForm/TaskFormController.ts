@@ -1,4 +1,4 @@
-import type { TaskCreationType, TopicType } from "@/Types";
+import type { TaskCreationType, TaskType, TopicType } from "@/Types";
 
 import { useDisclosure } from "@chakra-ui/react";
 
@@ -41,8 +41,13 @@ export const TaskFormController = ({ isUpdating }: PropsType) => {
     onClose();
   };
 
-  const handleOpen = (topic: TopicType) => {
+  const handleCreate = (topic: TopicType) => {
     board?.handleTopic(topic);
+    onOpen();
+  };
+
+  const handleUpdate = (task: TaskType) => {
+    console.log(task);
     onOpen();
   };
 
@@ -52,6 +57,7 @@ export const TaskFormController = ({ isUpdating }: PropsType) => {
     validate,
     isOpen,
     onClose,
-    handleOpen,
+    handleCreate,
+    handleUpdate,
   };
 };

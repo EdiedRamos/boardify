@@ -9,8 +9,8 @@ type PropsType = {
 export const AddTask = ({ topic }: PropsType) => {
   return (
     <TaskForm>
-      {({ onClick }) => (
-        <Button colorScheme="messenger" onClick={() => onClick(topic)}>
+      {({ onCreate }) => (
+        <Button colorScheme="messenger" onClick={() => onCreate(topic)}>
           + New Task
         </Button>
       )}

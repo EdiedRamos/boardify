@@ -1,4 +1,4 @@
-import type { TopicType } from "@/Types";
+import type { TaskType, TopicType } from "@/Types";
 
 import {
   Button,
@@ -25,9 +25,11 @@ import { IoIosCloseCircle } from "react-icons/io";
 import { SessionMiddleware } from "@/Components/Atoms";
 
 import { TaskFormController } from "./TaskFormController";
+import { getTitle } from "./taskForm.utils";
 
 type ChildrenProps = {
-  onClick: (topic: TopicType) => void;
+  onCreate: (topic: TopicType) => void;
+  onUpdate: (task: TaskType) => void;
 };
 
 type PropsType = {
@@ -39,17 +41,24 @@ export const TaskForm = ({
   children,
   isUpdating = false,
 }: PropsType): JSX.Element => {
-  const { initialValues, onSubmit, validate, isOpen, handleOpen, onClose } =
-    TaskFormController({ isUpdating });
+  const {
+    initialValues,
+    onSubmit,
+    validate,
+    isOpen,
+    handleCreate,
+    handleUpdate,
+    onClose,
+  } = TaskFormController({ isUpdating });
 
   return (
     <SessionMiddleware fallback={<></>}>
-      {children({ onClick: handleOpen })}
+      {children({ onCreate: handleCreate, onUpdate: handleUpdate })}
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add New Task</ModalHeader>
+          <ModalHeader>{getTitle(isUpdating)}</ModalHeader>
           <ModalCloseButton />
           <Formik
             initialValues={initialValues}

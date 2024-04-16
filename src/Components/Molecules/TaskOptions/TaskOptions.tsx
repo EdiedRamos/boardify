@@ -4,7 +4,7 @@ import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 
 import { BsThreeDots } from "react-icons/bs";
 import { MdDeleteOutline, MdEdit } from "react-icons/md";
-import { ConfirmationDialog } from "@/Components/Molecules";
+import { ConfirmationDialog, UpdateTask } from "@/Components/Molecules";
 
 type PropsType = {
   task: TaskType;
@@ -18,7 +18,16 @@ export const TaskOptions = ({ task, onDelete }: PropsType) => {
         <BsThreeDots />
       </MenuButton>
       <MenuList>
-        <MenuItem icon={<MdEdit fontSize={15} />}>Edit</MenuItem>
+        <UpdateTask>
+          {(props) => (
+            <MenuItem
+              onClick={() => props.onClick(task)}
+              icon={<MdEdit fontSize={15} />}
+            >
+              Edit
+            </MenuItem>
+          )}
+        </UpdateTask>
         <ConfirmationDialog
           header="Delete Task"
           onAccept={() => onDelete(task)}
