@@ -3,7 +3,7 @@ import type { TopicType } from "@/Types";
 import { TopicOptions, TaskPreview } from "@/Components/Molecules";
 import { Flex, Stack, Tag } from "@chakra-ui/react";
 
-import { AddTask } from "../AddTask/AddTask";
+import { AddTask } from "@/Components/Molecules";
 import { TaskColumnController } from "./TaskColumnController";
 
 export type PropsType = TopicType & {

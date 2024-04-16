@@ -10,3 +10,4 @@ export { TaskPreview } from "./TaskPreview/TaskPreview";
 export { TopicOptions } from "./TopicOptions/TopicOptions";
 export { UpdateBoard } from "./UpdateBoard/UpdateBoard";
 export { TaskOptions } from "./TaskOptions/TaskOptions";
+export { AddTask } from "./AddTask/AddTask";

@@ -24,32 +24,27 @@ import { IoIosCloseCircle } from "react-icons/io";
 
 import { SessionMiddleware } from "@/Components/Atoms";
 
-import { AddTaskController } from "./AddTaskController";
+import { TaskFormController } from "./TaskFormController";
 
-type PropsType = {
-  topic: TopicType;
+type ChildrenProps = {
+  onClick: (topic: TopicType) => void;
 };
 
-export const AddTask = ({ topic }: PropsType): JSX.Element => {
-  const {
-    initialValues,
-    onSubmit,
-    validate,
-    isDisabled,
-    isOpen,
-    handleOpen,
-    onClose,
-  } = AddTaskController();
+type PropsType = {
+  children: (props: ChildrenProps) => JSX.Element;
+  isUpdating?: boolean;
+};
+
+export const TaskForm = ({
+  children,
+  isUpdating = false,
+}: PropsType): JSX.Element => {
+  const { initialValues, onSubmit, validate, isOpen, handleOpen, onClose } =
+    TaskFormController({ isUpdating });
 
   return (
     <SessionMiddleware fallback={<></>}>
-      <Button
-        colorScheme="messenger"
-        onClick={() => handleOpen(topic)}
-        isDisabled={isDisabled}
-      >
-        + New Task
-      </Button>
+      {children({ onClick: handleOpen })}
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

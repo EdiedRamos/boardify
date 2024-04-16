@@ -4,12 +4,14 @@ import { useDisclosure } from "@chakra-ui/react";
 
 import { useBoard } from "@/Core/Hooks/useBoard";
 import { TaskService } from "@/Services";
-import { useDashboardStore } from "@/Store";
 import { validate } from "./validators";
 
-export const AddTaskController = () => {
+type PropsType = {
+  isUpdating: boolean;
+};
+
+export const TaskFormController = ({ isUpdating }: PropsType) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { topics } = useDashboardStore();
   const board = useBoard();
 
   const initialValues: TaskCreationType = {
@@ -21,6 +23,10 @@ export const AddTaskController = () => {
 
   const onSubmit = (values: TaskCreationType) => {
     if (!board?.currentTopic) {
+      return;
+    }
+    // * updating
+    if (isUpdating) {
       return;
     }
     values.topicId = board.currentTopic.id;
@@ -44,7 +50,6 @@ export const AddTaskController = () => {
     initialValues,
     onSubmit,
     validate,
-    isDisabled: topics.length === 0,
     isOpen,
     onClose,
     handleOpen,
