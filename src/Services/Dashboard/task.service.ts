@@ -1,11 +1,6 @@
 import { type AxiosResponse } from "axios";
 
-import type {
-  GetAllTasksI,
-  TaskCreationType,
-  TaskPreviewType,
-  TaskType,
-} from "@/Types";
+import type { GetAllTasksI, TaskCreationType, TaskType } from "@/Types";
 
 import { baseAxios } from "@/Domain/Config";
 
@@ -24,7 +19,7 @@ export const TaskService = {
     }
   },
 
-  async getAllTasks(topicId: string): Promise<Array<TaskPreviewType>> {
+  async getAllTasks(topicId: string): Promise<Array<TaskType>> {
     try {
       const response: AxiosResponse<GetAllTasksI> = await baseAxios
         .create()
@@ -35,12 +30,9 @@ export const TaskService = {
     }
   },
 
-  async deleteTopic(boardId: string): Promise<boolean> {
+  async deleteTask(taskId: string): Promise<boolean> {
     try {
-      const response: AxiosResponse<unknown> = await baseAxios
-        .create()
-        .delete<unknown>(`boards/${boardId}/`);
-      console.log({ response });
+      await baseAxios.create().delete<unknown>(`task/${taskId}/`);
       return true;
     } catch {
       return false;

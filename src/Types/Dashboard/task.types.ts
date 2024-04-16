@@ -27,5 +27,5 @@ export type TaskCreationType = Omit<TaskType, "id">;
 
 // * Response type
 export interface GetAllTasksI extends ResponseI {
-  content: TaskPreviewType[];
+  content: TaskType[];
 }

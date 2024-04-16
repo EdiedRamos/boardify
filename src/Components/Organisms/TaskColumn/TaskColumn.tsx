@@ -1,14 +1,17 @@
+import type { TopicType } from "@/Types";
+
 import { TopicOptions, TaskPreview } from "@/Components/Molecules";
 import { Flex, Stack, Tag } from "@chakra-ui/react";
 
 import { AddTask } from "../AddTask/AddTask";
-import {
-  TaskColumnController,
-  type TaskColumnType,
-} from "./TaskColumnController";
+import { TaskColumnController } from "./TaskColumnController";
 
-export const TaskColumn = (props: TaskColumnType): JSX.Element => {
-  const { tasks, ref } = TaskColumnController(props);
+export type PropsType = TopicType & {
+  index: number;
+};
+
+export const TaskColumn = (props: PropsType): JSX.Element => {
+  const { tasks, ref, handleDelete } = TaskColumnController(props);
 
   return (
     <Stack w="sm" ref={ref}>
@@ -31,8 +34,8 @@ export const TaskColumn = (props: TaskColumnType): JSX.Element => {
       </Flex>
       <AddTask topic={{ id: props.id, name: props.name }} />
       <Stack overflowX="hidden" overflowY="auto">
-        {tasks.map(({ id, name, description }) => (
-          <TaskPreview key={id} title={name} text={description ?? ""} />
+        {tasks.map((task) => (
+          <TaskPreview key={task.id} task={task} onDelete={handleDelete} />
         ))}
       </Stack>
     </Stack>

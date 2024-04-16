@@ -1,18 +1,24 @@
+import type { TaskType } from "@/Types";
+
 import { Card, CardBody, CardHeader, Heading, Text } from "@chakra-ui/react";
 
 type TaskPreviewProps = {
-  title: string;
-  text: string;
+  task: TaskType;
+  onDelete: (task: TaskType) => void;
 };
 
-export const TaskPreview = ({ title, text }: TaskPreviewProps): JSX.Element => {
+export const TaskPreview = ({
+  task,
+  onDelete,
+}: TaskPreviewProps): JSX.Element => {
   return (
     <Card variant="elevated">
       <CardHeader>
-        <Heading size="md">{title}</Heading>
+        <Heading size="md">{task.name}</Heading>
+        <button onClick={() => onDelete(task)}>DELETE</button>
       </CardHeader>
       <CardBody>
-        <Text>{text}</Text>
+        <Text>{task.description}</Text>
       </CardBody>
     </Card>
   );

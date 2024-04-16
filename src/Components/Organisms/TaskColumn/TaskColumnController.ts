@@ -1,20 +1,25 @@
-import type { TaskPreviewType, TopicType } from "@/Types";
+import type { TaskType, TopicType } from "@/Types";
+
+import { useEffect, useRef, useState } from "react";
 
 import { useIntersectionObserver } from "@/Core/Hooks";
-import { useEffect, useRef, useState } from "react";
-import { TaskService } from "@/Services";
 import { useBoard } from "@/Core/Hooks/useBoard";
+import { TaskService } from "@/Services";
 
-export type TaskColumnType = TopicType & {
-  index: number;
-};
-
-export const TaskColumnController = (props: TaskColumnType) => {
+export const TaskColumnController = (props: TopicType) => {
   const board = useBoard();
 
-  const [tasks, setTasks] = useState<Array<TaskPreviewType>>([]);
+  const [tasks, setTasks] = useState<Array<TaskType>>([]);
   const [ref, sentry] = useIntersectionObserver({ threshold: 0 });
   const wasWatched = useRef(false);
+
+  const handleDelete = (task: TaskType) => {
+    TaskService.deleteTask(task.id).then((status) => {
+      if (status) {
+        setTasks((prev) => prev.filter((curTask) => curTask.id !== task.id));
+      }
+    });
+  };
 
   useEffect(() => {
     if (!board?.newTask || board.currentTopic?.id !== props.id) return;
@@ -34,5 +39,5 @@ export const TaskColumnController = (props: TaskColumnType) => {
     // eslint-disable-next-line
   }, [sentry]);
 
-  return { tasks, ref, sentry };
+  return { tasks, ref, handleDelete };
 };
