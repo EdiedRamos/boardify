@@ -20,6 +20,7 @@ export interface DashboardStoreI {
   isLoadingTopics: boolean;
   setTopics: () => void;
   addTopic: (topic: Omit<TopicType, "id">) => void;
+  updateTopic: (topic: TopicType) => void;
   clearDashboard: () => void;
 }
 
@@ -28,6 +29,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
   topics: [],
   isLoadingTopics: false,
   currentBoard: null,
+
   async setBoards() {
     const boards = await BoardService.getAllBoards();
     set(() => ({
@@ -35,6 +37,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
       currentBoard: { ...boards[0], isNew: true },
     }));
   },
+
   setCurrentBoard(board) {
     set((store) => {
       // * Its the same board
@@ -46,6 +49,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
       };
     });
   },
+
   async addBoard(board) {
     const newBoard = await BoardService.createBoard(board);
     if (newBoard === null) return;
@@ -54,6 +58,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
       currentBoard: { ...newBoard, isNew: true },
     }));
   },
+
   async updateBoard(board) {
     const updated = await BoardService.updateBoard(board);
     set((store) => ({
@@ -63,6 +68,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
       currentBoard: { ...updated, isNew: false },
     }));
   },
+
   async deleteBoard() {
     const { currentBoard, boards } = useDashboardStore.getState();
     if (!currentBoard) return;
@@ -77,6 +83,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
       currentBoard: { ...newCurrentBoard, isNew: true },
     }));
   },
+
   async setTopics() {
     const { currentBoard } = useDashboardStore.getState();
     if (!currentBoard) return;
@@ -89,6 +96,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
       isLoadingTopics: false,
     }));
   },
+
   async addTopic(topic) {
     const { currentBoard } = useDashboardStore.getState();
     if (!currentBoard) return;
@@ -99,6 +107,16 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
     if (newTopic === null) return;
     set((store) => ({ topics: [...store.topics, newTopic] }));
   },
+  async updateTopic(topic) {
+    const updated = await TopicService.updateTopic(topic);
+    if (!updated) return;
+    set((store) => ({
+      topics: store.topics.map((topic) =>
+        topic.id === updated.id ? updated : topic
+      ),
+    }));
+  },
+
   clearDashboard() {
     set(() => ({
       boards: [],

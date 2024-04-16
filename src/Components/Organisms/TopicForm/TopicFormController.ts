@@ -1,3 +1,4 @@
+import { useBoard } from "@/Core/Hooks/useBoard";
 import { useDashboardStore } from "@/Store";
 import { TopicType } from "@/Types";
 
@@ -12,15 +13,24 @@ export const TopicFormController = ({
   onClose,
   isUpdating,
 }: AddTaskGroupControllerType) => {
-  const { addTopic } = useDashboardStore();
+  const { addTopic, updateTopic } = useDashboardStore();
+
+  const board = useBoard();
 
   const initialValues: ValuesType = {
-    name: "",
+    name: isUpdating ? board?.currentTopic?.name ?? "" : "",
   };
 
   const onSubmit = (values: ValuesType) => {
     if (isUpdating) {
-      alert("COMING SOON");
+      if (!board?.currentTopic) {
+        return;
+      }
+      const update: TopicType = {
+        id: board.currentTopic.id,
+        name: values.name,
+      };
+      updateTopic(update);
     } else {
       addTopic(values);
     }

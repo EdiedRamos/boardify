@@ -42,4 +42,15 @@ export const TopicService = {
       return false;
     }
   },
+
+  async updateTopic(topic: TopicType): Promise<TopicType | null> {
+    try {
+      const response: AxiosResponse<TopicType> = await baseAxios
+        .create()
+        .put<TopicType>(`/topics/${topic.id}/`, topic);
+      return response.data;
+    } catch {
+      return null;
+    }
+  },
 };

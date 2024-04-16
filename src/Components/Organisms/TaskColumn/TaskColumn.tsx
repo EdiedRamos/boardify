@@ -26,7 +26,7 @@ export const TaskColumn = (props: TaskColumnType): JSX.Element => {
           {props.name} ({tasks?.length})
         </Tag>
         <Flex position={"absolute"} gap={2} right={3}>
-          <TopicOptions />
+          <TopicOptions topic={{ id: props.id, name: props.name }} />
         </Flex>
       </Flex>
       <AddTask topic={{ id: props.id, name: props.name }} />
