@@ -18,7 +18,7 @@ export const Landing = () => {
             lineHeight={"110%"}
           >
             Enhance Your Productivity <br />
-            <Text as={"span"} color={"pink.400"}>
+            <Text as={"span"} color={"gray.400"}>
               with Boardify
             </Text>
           </Heading>
@@ -37,13 +37,9 @@ export const Landing = () => {
           >
             <SignIn
               text="Get Started"
-              colorScheme={"green"}
-              bg={"green.400"}
+              colorScheme={"blue"}
               rounded={"full"}
               px={6}
-              _hover={{
-                bg: "green.500",
-              }}
             />
             <SignUp
               text="Not member yet?"
