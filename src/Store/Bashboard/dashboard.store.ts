@@ -82,7 +82,8 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
     const newCurrentBoard = newBoardsList[0];
     set(() => ({
       boards: newBoardsList,
-      currentBoard: { ...newCurrentBoard, isNew: true },
+      currentBoard:
+        newBoardsList.length > 0 ? { ...newCurrentBoard, isNew: true } : null,
     }));
   },
 

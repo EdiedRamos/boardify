@@ -17,14 +17,12 @@ import { SessionMiddleware } from "@/Components/Atoms";
 
 export const OptionsMenu = (): JSX.Element => {
   const { currentBoard } = useDashboardStore();
+  if (!currentBoard) return <></>;
   return (
     <SessionMiddleware fallback={<></>}>
       <Popover>
         <PopoverTrigger>
-          <Button
-            colorScheme="twitter"
-            isDisabled={currentBoard === null || currentBoard === undefined}
-          >
+          <Button colorScheme="twitter" isDisabled={!currentBoard}>
             <Icon as={SlOptionsVertical} />
           </Button>
         </PopoverTrigger>
