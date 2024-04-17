@@ -14,14 +14,22 @@ type PropsType = {
 export const TaskOptions = ({ task, onDelete }: PropsType) => {
   return (
     <Menu size={"md"}>
-      <MenuButton aria-label="task options">
+      <MenuButton
+        transition="all 250ms"
+        _hover={{ transform: "scale(1.2)" }}
+        onClick={(event) => event.stopPropagation()}
+        aria-label="task options"
+      >
         <BsThreeDots />
       </MenuButton>
       <MenuList>
         <UpdateTask>
           {(props) => (
             <MenuItem
-              onClick={() => props.onClick(task)}
+              onClick={(event) => {
+                event.stopPropagation();
+                props.onClick(task);
+              }}
               icon={<MdEdit fontSize={15} />}
             >
               Edit
@@ -34,7 +42,10 @@ export const TaskOptions = ({ task, onDelete }: PropsType) => {
         >
           {(props) => (
             <MenuItem
-              onClick={props.onClick}
+              onClick={(event) => {
+                event.stopPropagation();
+                props.onClick();
+              }}
               icon={<MdDeleteOutline fontSize={15} />}
             >
               Delete
