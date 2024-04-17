@@ -7,6 +7,8 @@ type ValidateType = {
 export const validate = (values: TaskCreationType) => {
   const errors: ValidateType = {};
 
+  console.log({ values });
+
   const isEmptyName = values.name.trim().length === 0;
   if (isEmptyName) {
     errors.name = "Name is required";
@@ -18,11 +20,9 @@ export const validate = (values: TaskCreationType) => {
   }
 
   const areEmptyTaskItems = values.taskItems.filter((task) => {
-    if (typeof task !== "string") return false;
-    return task.trim().length === 0;
+    return task.content.trim().length === 0;
   });
   if (areEmptyTaskItems.length > 0) {
-    console.log("must appear an error");
     errors.taskItems = "There are empty fields";
   }
 

@@ -5,39 +5,42 @@ import { useDisclosure } from "@chakra-ui/react";
 import { useBoard } from "@/Core/Hooks/useBoard";
 import { TaskService } from "@/Services";
 import { validate } from "./validators";
+import { useState, useRef } from "react";
 
 type PropsType = {
   isUpdating: boolean;
 };
 
 export const TaskFormController = ({ isUpdating }: PropsType) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const board = useBoard();
-
-  const initialValues: TaskCreationType = {
+  const [initialValues, setInitialValues] = useState<TaskCreationType>({
     name: "",
     description: "",
     topicId: "",
     taskItems: [],
-  };
+  });
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const board = useBoard();
+  const taskRef = useRef<string | null>(null);
 
   const onSubmit = (values: TaskCreationType) => {
-    if (!board?.currentTopic) {
-      return;
-    }
     // * updating
     if (isUpdating) {
-      return;
-    }
-    values.topicId = board.currentTopic.id;
-    // TODO: Remove this when its not required
-    // @ts-expect-error This will be removed soon, so its better this than modify the current types
-    values.statusId = 1;
-    TaskService.createTask(values).then((task) => {
-      if (task) {
-        board.taskEmitter(task);
+      if (!taskRef.current) return;
+      TaskService.updateTask(taskRef.current, values);
+    } else {
+      if (!board?.currentTopic) {
+        return;
       }
-    });
+      values.topicId = board.currentTopic.id;
+      // TODO: Remove this when its not required
+      // @ts-expect-error This will be removed soon, so its better this than modify the current types
+      values.statusId = 1;
+      TaskService.createTask(values).then((task) => {
+        if (task) {
+          board.taskEmitter(task);
+        }
+      });
+    }
     onClose();
   };
 
@@ -47,8 +50,16 @@ export const TaskFormController = ({ isUpdating }: PropsType) => {
   };
 
   const handleUpdate = (task: TaskType) => {
-    console.log(task);
-    onOpen();
+    // console.log({ task });
+    TaskService.getById(task.id).then((currentTask) => {
+      if (!currentTask) return;
+      console.log({ currentTask });
+      taskRef.current = task.id;
+      setInitialValues(currentTask);
+      onOpen();
+    });
+    // task.taskItems = ["primero", "segundo"];
+    // setInitialValues(task);
   };
 
   return {

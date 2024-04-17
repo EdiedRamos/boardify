@@ -110,7 +110,7 @@ export const TaskForm = ({
                               <Input
                                 as={Field}
                                 placeholder="e.g It's always good to take a break."
-                                name={`taskItems.${index}`}
+                                name={`taskItems.${index}.content`}
                               />
                               <Icon
                                 fontSize={20}
@@ -128,14 +128,20 @@ export const TaskForm = ({
                         </Stack>
                         {!!props.errors.taskItems && (
                           <Text color="red.500" fontSize="sm">
-                            {props.errors.taskItems}
+                            {props.errors.taskItems.toString()}
                           </Text>
                         )}
                         <Button
                           w="full"
                           my={3}
                           colorScheme="gray"
-                          onClick={() => push("")}
+                          onClick={() =>
+                            push({
+                              id: crypto.randomUUID(),
+                              content: "",
+                              isDone: false,
+                            })
+                          }
                         >
                           + Add New Subtask
                         </Button>

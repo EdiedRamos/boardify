@@ -11,7 +11,7 @@ export const Board = (): JSX.Element => {
 
   return (
     <>
-      {!currentBoard ? (
+      {!currentBoard || !currentBoard.id ? (
         <EmptySection />
       ) : (
         <Box

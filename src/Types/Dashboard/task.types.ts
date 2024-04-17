@@ -9,21 +9,23 @@ export type TaskPreviewType = {
 
 export type TaskItemType = {
   id: string;
-  name: string;
+  content: string;
   isDone: boolean;
 };
-
-export type TaskItemCreateType = Array<string>;
 
 export type TaskType = {
   id: string;
   name: string;
   description: string;
   topicId: string;
-  taskItems: TaskItemCreateType | Array<TaskItemType>;
+  taskItems: Array<TaskItemType>;
 };
 
 export type TaskCreationType = Omit<TaskType, "id">;
+
+export type TaskCreationRequestType = Omit<TaskType, "id" | "taskItems"> & {
+  taskItems: Array<string>;
+};
 
 // * Response type
 export interface GetAllTasksI extends ResponseI {
