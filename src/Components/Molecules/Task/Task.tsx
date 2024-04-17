@@ -1,15 +1,17 @@
-import type { TaskType } from "@/Types";
 import {
-  Button,
+  Checkbox,
+  Heading,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
+  Skeleton,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
+import { TaskController } from "./TaskController";
 
 type ChildrenProps = {
   onClick: () => void;
@@ -17,34 +19,42 @@ type ChildrenProps = {
 
 type PropsType = {
   children: (props: ChildrenProps) => JSX.Element;
-  task?: TaskType;
+  taskId: string;
 };
 
-export const Task = ({ children, task }: PropsType) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export const Task = ({ children, taskId }: PropsType) => {
+  const { task, isOpen, onClose, isLoading, handleOpen } = TaskController({
+    taskId,
+  });
+
   return (
     <>
-      {children({ onClick: onOpen })}
-      <Modal isOpen={isOpen} onClose={onClose}>
+      {children({ onClick: handleOpen })}
+      <Modal isCentered isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>
+            <Skeleton height={"100%"} w={200} isLoaded={!isLoading}>
+              <Heading size={"md"}>{task?.name}</Heading>
+            </Skeleton>
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Exercitationem quia, corrupti distinctio labore nulla unde totam
-              error amet nesciunt omnis sunt commodi ullam dolore impedit nihil
-              voluptas in enim provident.
-            </p>
+            <Skeleton height={"100%"} w={"full"} isLoaded={!isLoading}>
+              <Text>{task?.description}</Text>
+            </Skeleton>
+            <Skeleton height={"100%"} w={"full"} isLoaded={!isLoading}>
+              {task?.taskItems ? (
+                <Stack>
+                  {task.taskItems.map((item) => (
+                    <Checkbox isChecked={item.isDone}>{item.content}</Checkbox>
+                  ))}
+                </Stack>
+              ) : (
+                <></>
+              )}
+            </Skeleton>
           </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant="ghost">Secondary Action</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

@@ -8,8 +8,8 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
-import { TaskOptions } from "../TaskOptions/TaskOptions";
 import { Task } from "../Task/Task";
+import { TaskOptions } from "../TaskOptions/TaskOptions";
 
 type TaskPreviewProps = {
   task: TaskType;
@@ -21,7 +21,7 @@ export const TaskPreview = ({
   onDelete,
 }: TaskPreviewProps): JSX.Element => {
   return (
-    <Task>
+    <Task taskId={task.id}>
       {({ onClick }) => (
         <Card
           onClick={onClick}
