@@ -33,6 +33,7 @@ export const useDashboardStore = create<DashboardStoreI>()((set) => ({
 
   async setBoards() {
     const boards = await BoardService.getAllBoards();
+    if (boards.length === 0) return;
     set(() => ({
       boards: boards,
       currentBoard: { ...boards[0], isNew: true },
