@@ -44,7 +44,7 @@ export const SidebarContent = ({
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text
           fontSize="2xl"
-          color={"gray.400"}
+          color={"gray.500"}
           fontFamily="monospace"
           fontWeight="bold"
         >

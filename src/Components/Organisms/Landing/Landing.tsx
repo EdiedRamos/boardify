@@ -18,7 +18,7 @@ export const Landing = () => {
             lineHeight={"110%"}
           >
             Enhance Your Productivity <br />
-            <Text as={"span"} color={"gray.400"}>
+            <Text as={"span"} color={"gray.500"}>
               with Boardify
             </Text>
           </Heading>
