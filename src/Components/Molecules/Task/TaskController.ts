@@ -1,5 +1,6 @@
 import { TaskService } from "@/Services";
-import { TaskType } from "@/Types";
+import { taskItemService } from "@/Services/Dashboard/taskItem.service";
+import { TaskItemType, TaskType } from "@/Types";
 import { useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -20,6 +21,23 @@ export const TaskController = ({ taskId }: PropsType) => {
       .finally(() => setIsLoading(false));
   };
 
+  const handleCheck = (taskItem: TaskItemType) => {
+    taskItemService
+      .updateTaskItem({ id: taskItem.id, isDone: !taskItem.isDone })
+      .then((updatedItem) => {
+        if (!updatedItem) return;
+        setTask((prev) => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            taskItems: prev?.taskItems.map((item) =>
+              item.id === updatedItem.id ? updatedItem : item
+            ),
+          };
+        });
+      });
+  };
+
   return {
     task,
     isOpen,
@@ -27,5 +45,6 @@ export const TaskController = ({ taskId }: PropsType) => {
     onClose,
     isLoading,
     handleOpen,
+    handleCheck,
   };
 };

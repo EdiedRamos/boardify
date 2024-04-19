@@ -23,9 +23,10 @@ type PropsType = {
 };
 
 export const Task = ({ children, taskId }: PropsType) => {
-  const { task, isOpen, onClose, isLoading, handleOpen } = TaskController({
-    taskId,
-  });
+  const { task, isOpen, onClose, isLoading, handleOpen, handleCheck } =
+    TaskController({
+      taskId,
+    });
 
   return (
     <>
@@ -47,7 +48,12 @@ export const Task = ({ children, taskId }: PropsType) => {
               {task?.taskItems ? (
                 <Stack>
                   {task.taskItems.map((item) => (
-                    <Checkbox isChecked={item.isDone}>{item.content}</Checkbox>
+                    <Checkbox
+                      onChange={() => handleCheck(item)}
+                      isChecked={item.isDone}
+                    >
+                      {item.content}
+                    </Checkbox>
                   ))}
                 </Stack>
               ) : (
