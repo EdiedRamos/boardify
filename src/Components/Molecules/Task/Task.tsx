@@ -1,6 +1,9 @@
 import {
   Checkbox,
+  Divider,
   Heading,
+  List,
+  ListItem,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -8,7 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Skeleton,
-  Stack,
+  Tag,
   Text,
 } from "@chakra-ui/react";
 import { TaskController } from "./TaskController";
@@ -31,38 +34,41 @@ export const Task = ({ children, taskId }: PropsType) => {
   return (
     <>
       {children({ onClick: handleOpen })}
-      <Modal isCentered isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            <Skeleton height={"100%"} w={200} isLoaded={!isLoading}>
-              <Heading size={"md"}>{task?.name}</Heading>
-            </Skeleton>
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Skeleton height={"100%"} w={"full"} isLoaded={!isLoading}>
-              <Text>{task?.description}</Text>
-            </Skeleton>
-            <Skeleton height={"100%"} w={"full"} isLoaded={!isLoading}>
-              {task?.taskItems ? (
-                <Stack>
-                  {task.taskItems.map((item) => (
-                    <Checkbox
-                      onChange={() => handleCheck(item)}
-                      isChecked={item.isDone}
-                    >
-                      {item.content}
-                    </Checkbox>
-                  ))}
-                </Stack>
-              ) : (
-                <></>
-              )}
-            </Skeleton>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      {task !== null && (
+        <Modal isCentered isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>
+              <Skeleton height={"100%"} w={200} isLoaded={!isLoading}>
+                <Heading size={"md"}>{task.name}</Heading>
+              </Skeleton>
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody py={3}>
+              <Skeleton height={"100%"} w={"full"} isLoaded={!isLoading}>
+                <Text>{task.description}</Text>
+              </Skeleton>
+              <Skeleton height={"100%"} w={"full"} isLoaded={!isLoading}>
+                {task.taskItems.length > 0 && (
+                  <List spacing={2}>
+                    <Divider my={3} />
+                    {task.taskItems.map((item) => (
+                      <ListItem key={item.id}>
+                        <Checkbox
+                          onChange={() => handleCheck(item)}
+                          isChecked={item.isDone}
+                        >
+                          <Tag>{item.content}</Tag>
+                        </Checkbox>
+                      </ListItem>
+                    ))}
+                  </List>
+                )}
+              </Skeleton>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      )}
     </>
   );
 };
