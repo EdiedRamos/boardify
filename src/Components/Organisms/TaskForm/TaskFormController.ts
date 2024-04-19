@@ -6,6 +6,7 @@ import { useBoard } from "@/Core/Hooks/useBoard";
 import { TaskService } from "@/Services";
 import { validate } from "./validators";
 import { useState, useRef } from "react";
+import { useTask } from "@/Core/Hooks/useTask";
 
 type PropsType = {
   isUpdating: boolean;
@@ -20,13 +21,17 @@ export const TaskFormController = ({ isUpdating }: PropsType) => {
   });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const board = useBoard();
+  const taskState = useTask();
   const taskRef = useRef<string | null>(null);
 
   const onSubmit = (values: TaskCreationType) => {
     // * updating
     if (isUpdating) {
       if (!taskRef.current) return;
-      TaskService.updateTask(taskRef.current, values);
+      TaskService.updateTask(taskRef.current, values).then((response) => {
+        if (!response || !taskState) return;
+        taskState.onUpdate(response);
+      });
     } else {
       if (!board?.currentTopic) {
         return;
