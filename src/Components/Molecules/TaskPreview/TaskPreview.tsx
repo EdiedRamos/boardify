@@ -33,7 +33,6 @@ export const TaskPreview = ({
           transition="all 250ms"
           _hover={{
             cursor: "pointer",
-            // bg: "gray.50",
             bg: hoverBgColor,
             transform: "scale(0.98)",
           }}
