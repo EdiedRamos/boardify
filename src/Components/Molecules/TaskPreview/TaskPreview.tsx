@@ -44,7 +44,11 @@ export const TaskPreview = ({
             <Heading size="md">{task.name}</Heading>
           </CardHeader>
           <CardBody>
-            <Text>{task.description}</Text>
+            <Text>
+              {task.description
+                .substring(0, 45)
+                .concat(task.description.length > 45 ? "..." : "")}
+            </Text>
           </CardBody>
         </Card>
       )}
