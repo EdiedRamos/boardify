@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { FiMenu } from "react-icons/fi";
 
-import { useDashboardStore } from "@/Store";
+import { useDashboardStore, useSessionStore } from "@/Store";
 
 interface NavbarProps extends FlexProps {
   onOpen: () => void;
@@ -18,9 +18,11 @@ interface NavbarProps extends FlexProps {
 
 export const Navbar = ({ onOpen, ...rest }: NavbarProps): JSX.Element => {
   const { currentBoard } = useDashboardStore();
+  const { isLogged } = useSessionStore();
 
   return (
     <Flex
+      display={{ base: "flex", md: isLogged ? "flex" : "none" }}
       px={{ base: 4, md: 5 }}
       height="20"
       alignItems="center"
