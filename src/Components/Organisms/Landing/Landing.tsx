@@ -1,10 +1,10 @@
-import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Center, Container, Heading, Stack, Text } from "@chakra-ui/react";
 
 import { SignIn, SignUp } from "@/Components/Molecules";
 
 export const Landing = () => {
   return (
-    <>
+    <Center minH={"100vh"}>
       <Container maxW={"3xl"}>
         <Stack
           as={Box}
@@ -50,6 +50,6 @@ export const Landing = () => {
           </Stack>
         </Stack>
       </Container>
-    </>
+    </Center>
   );
 };
