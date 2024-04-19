@@ -7,6 +7,7 @@ import {
   CardHeader,
   Heading,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Task } from "../Task/Task";
 import { TaskOptions } from "../TaskOptions/TaskOptions";
@@ -20,6 +21,8 @@ export const TaskPreview = ({
   task,
   onDelete,
 }: TaskPreviewProps): JSX.Element => {
+  const hoverBgColor = useColorModeValue("gray.50", "gray.600");
+
   return (
     <Task taskId={task.id}>
       {({ onClick }) => (
@@ -30,7 +33,8 @@ export const TaskPreview = ({
           transition="all 250ms"
           _hover={{
             cursor: "pointer",
-            bg: "gray.50",
+            // bg: "gray.50",
+            bg: hoverBgColor,
             transform: "scale(0.98)",
           }}
         >
