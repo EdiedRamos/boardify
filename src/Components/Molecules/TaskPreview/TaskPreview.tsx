@@ -1,5 +1,6 @@
 import type { TaskType } from "@/Types";
 
+import { wrapText } from "@/Domain/utils";
 import {
   Box,
   Card,
@@ -44,11 +45,7 @@ export const TaskPreview = ({
             <Heading size="md">{task.name}</Heading>
           </CardHeader>
           <CardBody>
-            <Text>
-              {task.description
-                .substring(0, 45)
-                .concat(task.description.length > 45 ? "..." : "")}
-            </Text>
+            <Text>{wrapText(task.description, 45)}</Text>
           </CardBody>
         </Card>
       )}
