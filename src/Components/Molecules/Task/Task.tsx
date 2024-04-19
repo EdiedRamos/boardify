@@ -58,7 +58,9 @@ export const Task = ({ children, taskId }: PropsType) => {
                           onChange={() => handleCheck(item)}
                           isChecked={item.isDone}
                         >
-                          <Tag>{item.content}</Tag>
+                          <Tag colorScheme={item.isDone ? "green" : "gray"}>
+                            {item.content}
+                          </Tag>
                         </Checkbox>
                       </ListItem>
                     ))}
