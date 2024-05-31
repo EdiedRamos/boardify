@@ -1,1 +1,1 @@
-export const API_BASE_URL = "https://loving-proud-gnat.ngrok-free.app";
+export const API_BASE_URL = "https://bordify-monolith.onrender.com";
