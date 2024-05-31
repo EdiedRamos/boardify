@@ -1,5 +1,4 @@
 import { Box, Center, Container, Heading, Stack, Text } from "@chakra-ui/react";
-
 import { SignIn, SignUp } from "@/Components/Molecules";
 
 export const Landing = () => {
@@ -23,11 +22,10 @@ export const Landing = () => {
             </Text>
           </Heading>
           <Text color={"gray.500"}>
-            Make your work flow effortlessly with KanbanFlow. Organize your
-            tasks visually, collaborate effectively with your team, and achieve
-            your goals with ease. Simplify your day-to-day and take your
-            productivity to the next level with our intuitive and powerful
-            platform!
+            Make your work flow effortlessly with Boardify. Organize your tasks
+            visually, collaborate effectively with your team, and achieve your
+            goals with ease. Simplify your day-to-day and take your productivity
+            to the next level with our intuitive and powerful platform!
           </Text>
           <Stack
             direction={"column"}
